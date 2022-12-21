@@ -10,7 +10,9 @@ class Caroussel {
         }, options);
 
         let children = [].slice.call(element.children)
-        this.currentItem = 0;
+        this.isMobile = false
+        this.isTablett = false
+        this.currentItem = 0
         this.root = this.createDivWithClass('caroussel')
 
         this.container = this.createDivWithClass('caroussel_container')
@@ -26,6 +28,10 @@ class Caroussel {
         })
         this.setStyle()
         this.createNavigation()
+        this.resizeWindow()
+        window.addEventListener('resize', this.resizeWindow.bind(this))
+
+
     }
 
     /**
@@ -41,9 +47,9 @@ class Caroussel {
      * Apply the right size to a given element
      */
     setStyle() {
-        let ratio = this.items.length / this.options.slidesVisible
+        let ratio = this.items.length / this.slidesVisible
         this.container.style.width = (ratio * 100) + "%"
-        this.items.forEach(item => item.style.width = ((100 / this.options.slidesVisible) / ratio) + "%")
+        this.items.forEach(item => item.style.width = ((100 / this.slidesVisible) / ratio) + "%")
     }
 
     /**
@@ -63,14 +69,14 @@ class Caroussel {
      * Make the caroussel go to the right
      */
     next() {
-        this.goToItem(this.currentItem + this.options.slidesToScroll)
+        this.goToItem(this.currentItem + this.slidesToScroll)
     }
 
     /**
      * Make the caroussel go to the left
      */
     prev() {
-        this.goToItem(this.currentItem - this.options.slidesToScroll)
+        this.goToItem(this.currentItem - this.slidesToScroll)
     }
 
     /**
@@ -90,10 +96,36 @@ class Caroussel {
     }
 
     get slidesToScroll() {
-
+        if( this.isMobile === true ){
+            return 1
+        }else if(this.isTablett === true ){
+            return 2
+        }else{
+            return this.options.slidesToScroll
+        }
     }
 
     get slidesVisible() {
+        if( this.isMobile === true ){
+            return 1
+        }else if(this.isTablett === true ){
+            return 2
+        }else{
+            return this.options.slidesVisible
+        }
+    }
+
+    resizeWindow(){
+        let mobile = window.innerWidth < 600
+        let tablett = window.innerWidth < 900
+
+        if(mobile !== this.isMobile){
+            this.isMobile = mobile
+            this.setStyle()
+        }else if(tablett !== this.isTablett){
+            this.isTablett = tablett
+            this.setStyle()
+        }
 
     }
 }
