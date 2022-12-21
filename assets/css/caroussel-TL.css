@@ -1,0 +1,56 @@
+#container {
+    margin: 5%;
+}
+
+.caroussel {
+    position: relative;
+    height: 300px;
+}
+
+.caroussel_item {
+    float: left;
+    overflow: hidden;
+
+}
+
+.element {
+    width: 250px;
+    height: auto;
+    transition: transform .1s;
+}
+.element img{
+    border-radius: 20%;
+}
+
+.element:hover{
+    transform: scale(1.1);
+    border-radius: 10%;
+}
+
+.caroussel_next,
+.caroussel_prev {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 45%;
+    right: -20px;
+    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
+    cursor: pointer;
+}
+
+.caroussel_prev {
+    right: auto;
+    left: -20px;
+    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/previous.png") ;
+    background-size: 100%;
+}
+
+.caroussel_next{
+    background:center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/next.png");
+    background-size: 100%;
+}
+
+.caroussel_next:hover, .caroussel_prev:hover{
+    transform: scale(1.4);
+}
