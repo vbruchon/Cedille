@@ -417,19 +417,20 @@ function my_theme_enqueue_styles()
 {
 	// CSS & JS files
 	wp_enqueue_script('jquery-min-js', get_template_directory_uri() . '/assets/js/jquery-1.11.0.min.js', array(), '1.11.0');
-	wp_register_style('caroussel-TL-css', get_template_directory_uri(). '/assets/css/caroussel-TL.css', '1.0.0');
-	wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', array(), '1.0.0');
+	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	wp_enqueue_script('carousel-js', get_template_directory_uri() . '/assets/js/carousel-js.js', array(), '1.0.0');
 
 	// Enqueue all CSS & JS files
 	wp_enqueue_script('jquery-min-js');
-	wp_enqueue_script('custom-js');
-	wp_enqueue_style('caroussel-TL-css');
+	wp_enqueue_script('carousel-js');
+	wp_enqueue_style('carousel-css');
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
 function shortcode_carousel_TL()
 { ?>
-	<div id="container"><?
+	<div id="container">
+		<?
 		$params = array('post_type' => 'tiers-lieux', 'orderby' => 'post_date', 'order' => 'ASC');
 		$tiers_lieux = new WP_Query($params);
 
@@ -437,68 +438,49 @@ function shortcode_carousel_TL()
 			return false;
 		else while ($tiers_lieux->have_posts()) : $tiers_lieux->the_post(); ?>
 			<div class="element">
-				<div class="logo"> <? the_post_thumbnail() ?></div>
+				<div class="logo"><a href="<? the_field('website_tl') ?>" target="_blank"><? the_post_thumbnail() ?></a></div>
 			</div>
 		<? endwhile; ?>
 	</div>
-<!-- 	<style>
-		#container {
-    margin: 5%;
-}
-
-.caroussel {
-    position: relative;
-    height: 300px;
-}
-
-.caroussel_item {
-    float: left;
-    overflow: hidden;
-
-}
-
-.element {
-    width: 250px;
-    height: auto;
-    transition: transform .1s;
-}
-.element img{
-    border-radius: 20%;
-}
-
-.element:hover{
-    transform: scale(1.1);
-    border-radius: 10%;
-}
-
-.caroussel_next,
-.caroussel_prev {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    top: 45%;
-    right: -20px;
-    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
-    cursor: pointer;
-}
-
-.caroussel_prev {
-    right: auto;
-    left: -20px;
-    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/previous.png") ;
-    background-size: 100%;
-}
-
-.caroussel_next{
-    background:center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/next.png");
-    background-size: 100%;
-}
-
-.caroussel_next:hover, .caroussel_prev:hover{
-    transform: scale(1.4);
-}
-	</style>
- --><?
+<?
 }
 add_shortcode('tiers-lieux_caroussel', 'shortcode_carousel_TL');
+
+function shortcode_carousel_Advices()
+{ ?>
+	<div id="adviceCaroussel">
+		<?
+		$params = array('post_type' => 'avis', 'orderby' => 'post_date', 'terms' => 'stagiaire');
+		$advices = new WP_Query($params);
+		$slugDesired = "stagiaire";
+		$theField = 'avis_nameFormation';
+
+		if (!$advices->have_posts())
+			return false;
+		else while ($advices->have_posts()) : $advices->the_post();
+			$terms = get_the_terms($advices->ID, 'auteur');
+		?>
+			<div class="element">
+				<div class="avis">
+					<h2 class="formation_name"><? echo the_field($theField) ?></h2>
+					<div class="content">
+						<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+						<p class="the_field"><? echo the_field('avis_content') ?></p>
+						<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+					</div>
+					<div class="author">
+						<? if ($terms[0]->slug === $slugDesired) { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
+						<? } else { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
+
+						<? } ?>
+						<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
+					</div>
+				</div>
+			</div>
+		<? endwhile; ?>
+	</div>
+<?
+}
+add_shortcode('advices_caroussel', 'shortcode_carousel_Advices');
