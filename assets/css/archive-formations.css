@@ -1,52 +1,70 @@
+#archive_formation_title {
+    text-align: center;
+    font-size: 150%;
+    margin-top: 5%;
+}
+
+#filterbar {
+    background-color: red;
+    width: 60%;
+    margin: 3% auto;
+}
+
 #carte_Formation {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  
-  .carte {
+}
+
+.carte {
     background-color: #FFFF;
-    width: auto;
-    margin-left: 2%;
+    margin-left: 4%;
     margin-bottom: 3%;
     padding: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
     border-radius: 30px;
-  }
-  
-  .carte_img {
+}
+
+.carte_img {
     margin-bottom: 5%;
-    display: block;
-    margin-left: 20%;
-  }
-  
-  .carte_title {
-    text-align: center;
-    font-weight: 500 !important;
-  }
-  
-  #link_formation {
-    display: block;
-    margin: 3% auto;
-  }
-  
-  /* .carte {
-    display: block;
-    width: 30%;
+    display: flex;
+    justify-content: center;
+    width: auto;
     height: auto;
-    margin-left: 50px;
-    margin-bottom: 35px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
-    background-color: #FFFF;
-  }
-  
-  .carte_img {
-    /*   width: 100%;
-    height: 250px; 
-    margin-bottom: 120px;
-  }
-  
-   */
-  
-  /*----------------------------------------------------------------------------------------------------------*/
+}
+
+.carte_title {
+    text-align: center;
+    font-weight: 600 !important;
+    font-size: 120% !important;
+    margin: 2% auto 0 auto;
+}
+
+#link_formation {
+    display: block;
+    margin: 6% auto 3% auto;
+    font-size: 100%;
+}
+
+@media (max-width : 630px) {
+    body {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+
+    .carte {
+        width: 80%;
+    }
+}
+
+@media (min-width : 631px) and (max-width : 1100px) {
+    .carte {
+        width: 38%;
+    }
+}
+
+@media (min-width : 1101px) {
+    .carte {
+        width: 23%;
+    }
+}

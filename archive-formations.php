@@ -13,7 +13,12 @@
 
 <?php get_header(); ?>
 <div class="global_css">
-    <h1>Nos Formations</h1>
+
+    <h1 id="archive_formation_title">Nos Formations</h1>
+
+    <div id="filterbar">
+        <p>barre de filtre</p>
+    </div>
 
     <?php
     /*
@@ -45,7 +50,6 @@
                     </h2>
                     <button id="link_formation" onclick="window.location.href = '<? the_permalink() ?>'">Découvrir la formation</button>
                 </div>
-
             <?php endwhile; ?>
 
         <?php else : ?>
