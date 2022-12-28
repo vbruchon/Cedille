@@ -1,0 +1,52 @@
+#carte_Formation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .carte {
+    background-color: #FFFF;
+    width: auto;
+    margin-left: 2%;
+    margin-bottom: 3%;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
+    border-radius: 30px;
+  }
+  
+  .carte_img {
+    margin-bottom: 5%;
+    display: block;
+    margin-left: 20%;
+  }
+  
+  .carte_title {
+    text-align: center;
+    font-weight: 500 !important;
+  }
+  
+  #link_formation {
+    display: block;
+    margin: 3% auto;
+  }
+  
+  /* .carte {
+    display: block;
+    width: 30%;
+    height: auto;
+    margin-left: 50px;
+    margin-bottom: 35px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
+    background-color: #FFFF;
+  }
+  
+  .carte_img {
+    /*   width: 100%;
+    height: 250px; 
+    margin-bottom: 120px;
+  }
+  
+   */
+  
+  /*----------------------------------------------------------------------------------------------------------*/

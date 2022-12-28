@@ -417,13 +417,21 @@ function my_theme_enqueue_styles()
 {
 	// CSS & JS files
 	wp_enqueue_script('jquery-min-js', get_template_directory_uri() . '/assets/js/jquery-1.11.0.min.js', array(), '1.11.0');
-	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	
+	//My custom JS
 	wp_enqueue_script('carousel-js', get_template_directory_uri() . '/assets/js/carousel-js.js', array(), '1.0.0');
+	
+	//My custom CSS
+	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	wp_register_style('archive-formations-css', get_template_directory_uri() . '/assets/css/archive-formations.css', '1.0.0');
+	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
 
 	// Enqueue all CSS & JS files
 	wp_enqueue_script('jquery-min-js');
 	wp_enqueue_script('carousel-js');
 	wp_enqueue_style('carousel-css');
+	wp_enqueue_style('archive-formations-css');
+	wp_enqueue_style('single-formations-css');	
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
