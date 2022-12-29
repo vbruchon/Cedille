@@ -24,7 +24,6 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
     border-radius: 30px;
 }
-
 .carte_img {
     margin-bottom: 5%;
     display: flex;
@@ -44,6 +43,24 @@
     display: block;
     margin: 6% auto 3% auto;
     font-size: 100%;
+}
+
+#link_formation:hover {
+    font-size: 120%;
+}
+.category{
+    display: flex;
+    justify-content: center;
+}
+
+.name_category{
+    margin-top: 7%;
+}
+.icone_category{
+    width: 20%;
+    height: auto;
+    margin-right: 7%;
+    margin-bottom: 2%;
 }
 
 @media (max-width : 630px) {
