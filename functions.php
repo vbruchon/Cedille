@@ -417,12 +417,13 @@ function my_theme_enqueue_styles()
 {
 	// CSS & JS files
 	wp_enqueue_script('jquery-min-js', get_template_directory_uri() . '/assets/js/jquery-1.11.0.min.js', array(), '1.11.0');
-	
+
 	//My custom JS
 	wp_enqueue_script('carousel-js', get_template_directory_uri() . '/assets/js/carousel-js.js', array(), '1.0.0');
 	
 	//My custom CSS
 	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	wp_register_style('advices_caroussel-css', get_template_directory_uri() . '/assets/css/advices_carousel.css', '1.0.0');
 	wp_register_style('archive-formations-css', get_template_directory_uri() . '/assets/css/archive-formations.css', '1.0.0');
 	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
 
@@ -430,8 +431,9 @@ function my_theme_enqueue_styles()
 	wp_enqueue_script('jquery-min-js');
 	wp_enqueue_script('carousel-js');
 	wp_enqueue_style('carousel-css');
+	wp_enqueue_style('advices_caroussel-css');
 	wp_enqueue_style('archive-formations-css');
-	wp_enqueue_style('single-formations-css');	
+	wp_enqueue_style('single-formations-css');
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
@@ -489,6 +491,52 @@ function shortcode_carousel_Advices()
 			</div>
 		<? endwhile; ?>
 	</div>
-<?
+	<?
 }
 add_shortcode('advices_caroussel', 'shortcode_carousel_Advices');
+
+function shortcode_Advices($atts)
+{
+	$contentField = 'avis_content';
+	$formationName = 'avis_nameFormation';
+	//Je récupère mon paramètres de mon short-code
+	$a = shortcode_atts(array('auteur' => '#'), $atts);
+	//J'utilise ce paramètre pour l'utiliser en tant que term voulue
+	$tax_query = array(
+		'taxonomy' => 'auteur',
+		'field' => 'name',
+		'terms' => $a['auteur']
+	);
+	//J'ajoute à mes params ma tax_query comportant en term le paramètre saisie par le user
+	$params = array('post_type' => 'avis', 'tax_query' => array($tax_query));
+	//Je fais ma requête en lui passant les params créer
+	$advices = new WP_Query($params);
+
+
+	if (!$advices->have_posts())
+		return "Aucun avis trouvé";
+	else while ($advices->have_posts()) : $advices->the_post(); ?>
+		<div id="adviceCaroussel">
+			<div class="element">
+				<div class="avis">
+					<h2 class="formation_name"><? echo the_field($formationName) ?></h2>
+					<div class="content">
+						<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+						<p class="the_field"><? echo the_field('avis_content') ?></p>
+						<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+					</div>
+					<div class="author">
+						<? if ($a['auteur'] === "Stagiaire") { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
+						<? } else { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
+
+						<? } ?>
+						<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
+					</div>
+				</div>
+			</div>
+	<?
+	endwhile;
+}
+add_shortcode('advices', 'shortcode_Advices');
