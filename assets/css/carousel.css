@@ -57,6 +57,9 @@
     transform: scale(1.2);
 }
 
+.caroussel_element{
+  float: left;
+}
 
 .avis{
     border-radius: 10%;

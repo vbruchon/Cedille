@@ -243,10 +243,10 @@ if (!function_exists('hello_elementor_body_open')) {
  */
 function wpm_custom_post_type()
 {
+	/*______________________CREATE Custom Post Type____________________*/
 
-	// FORMATIONS 
-
-	/* Création du CPT*/
+	/*_____FORMATIONS________*/
+	
 	$labels = array(
 		'name' => _x('Formations', 'Post Type General Name'),
 		'singular_name'       => _x('Formation', 'Post Type Singular Name'),
@@ -267,7 +267,7 @@ function wpm_custom_post_type()
 	$args = array(
 		'label'               => __('Formations'),
 		'labels'              => $labels,
-		'menu_position'		  => 0,
+		'menu_position'		  => 4,
 		'menu_icon'      => 'dashicons-welcome-learn-more',
 		'supports'            => array('title', 'thumbnail', 'custom-fields'),
 		/* options supplémentaires */
@@ -280,73 +280,8 @@ function wpm_custom_post_type()
 	register_post_type('formations', $args);
 
 
-	/* Création des taxonomis du CPT formations */
-	$labels = array(
-		'name' => 'Thématiques',
-		'new_item_name' => 'Nouvelle thématique',
-		'parent_item' => 'Thématique parentes',
-	);
+	/*_____TIERS-LIEUX_____*/
 
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'show_in_rest' => true,
-		'hierarchical' => true,
-	);
-
-	register_taxonomy('thematique', 'formations', $args);
-
-	// AVIS 
-
-	/* Création du CPT */
-	$labels = array(
-		'name' => _x('Avis', 'Post Type General Name'),
-		'singular_name'       => _x('Avis', 'Post Type Singular Name'),
-		'menu_name'           => __('Avis'),
-		'all_items'           => __('Toutes les avis'),
-		'view_item'           => __('Voir les avis'),
-		'add_new_item'        => __('Ajouter un nouvel avis'),
-		'add_new'             => __('Ajouter'),
-		'edit_item'           => __('Editer l\'avis '),
-		'update_item'         => __('Modifier l\'avis)'),
-		'search_items'        => __('Rechercher un avis'),
-		'not_found'           => __('Non trouvée'),
-		'not_found_in_trash'  => __('Non trouvée dans la corbeille'),
-		'categories' 		  => __('Thématiques')
-	);
-
-	$args = array(
-		'label'               => __('Avis'),
-		'labels'              => $labels,
-		'menu_position'		  => 1,
-		'menu_icon'      => 'dashicons-admin-comments',
-		'supports'            => array('title', 'custom-fields',),
-		'show_in_rest' 		  => true,
-		'hierarchical'        => false,
-		'public'              => true,
-		'has_archive'         => true,
-		'rewrite'			  => array('slug' => 'avis'),
-	);
-	register_post_type('avis', $args);
-
-	/* Création des taxonomis du CPT Avis */
-	$labels = array(
-		'name' => 'Auteur',
-		'new_item_name' => 'Type de l\'auteur',
-	);
-
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'show_in_rest' => true,
-		'hierarchical' => true,
-	);
-
-	register_taxonomy('auteur', 'avis', $args);
-
-	// TIERS-LIEUX 
-
-	/* Création du CPT "Tiers-Lieux  */
 	$labels = array(
 		'name' => _x('Tiers-Lieux', 'Post Type General Name'),
 		'singular_name'       => _x('Tiers-Lieu', 'Post Type Singular Name'),
@@ -366,7 +301,7 @@ function wpm_custom_post_type()
 	$args = array(
 		'label'               => __('Tiers-Lieux'),
 		'labels'              => $labels,
-		'menu_position'	      => 2,
+		'menu_position'	      => 5,
 		'menu_icon'           => 'dashicons-admin-multisite',
 		'supports'            => array('title', 'thumbnail', 'custom-fields'),
 		/* options supplémentaires */
@@ -377,6 +312,105 @@ function wpm_custom_post_type()
 		'rewrite'	      => array('slug' => 'tiers-lieux'),
 	);
 	register_post_type('tiers-lieux', $args);
+
+	/*_____AVIS_____*/
+	
+	$labels = array(
+		'name' => _x('Avis', 'Post Type General Name'),
+		'singular_name'       => _x('Avis', 'Post Type Singular Name'),
+		'menu_name'           => __('Avis'),
+		'all_items'           => __('Toutes les avis'),
+		'view_item'           => __('Voir les avis'),
+		'add_new_item'        => __('Ajouter un nouvel avis'),
+		'add_new'             => __('Ajouter'),
+		'edit_item'           => __('Editer l\'avis '),
+		'update_item'         => __('Modifier l\'avis)'),
+		'search_items'        => __('Rechercher un avis'),
+		'not_found'           => __('Non trouvée'),
+		'not_found_in_trash'  => __('Non trouvée dans la corbeille'),
+		'categories' 		  => __('Thématiques')
+	);
+
+	$args = array(
+		'label'               => __('Avis'),
+		'labels'              => $labels,
+		'menu_position'		  => 6,
+		'menu_icon'      => 'dashicons-admin-comments',
+		'supports'            => array('title', 'custom-fields',),
+		'show_in_rest' 		  => true,
+		'hierarchical'        => false,
+		'public'              => true,
+		'has_archive'         => true,
+		'rewrite'			  => array('slug' => 'avis'),
+	);
+	register_post_type('avis', $args);
+
+	/*_____CONTACT_____*/
+
+	$labels = array(
+		'name' => _x('Contacts', 'Post Type General Name'),
+		'singular_name'       => _x('Contact', 'Post Type Singular Name'),
+		'menu_name'           => __('Contact'),
+		// Les différents libellés de l'administration 		
+		'all_items'           => __('Tous les moyen de contact'),
+		'view_item'           => __('Voir les moyen de contact'),
+		'add_new_item'        => __('Ajouter un nouveau moyen de contact'),
+		'add_new'             => __('Ajouter'),
+		'edit_item'           => __('Editer le moyen de contact'),
+		'update_item'         => __('Modifier le moyen de contact'),
+		'search_items'        => __('Rechercher un moyen de contact'),
+		'not_found'           => __('Non trouvée'),
+		'not_found_in_trash'  => __('Non trouvée dans la corbeille'),
+	);
+
+	$args = array(
+		'label'               => __('Contact'),
+		'labels'              => $labels,
+		'menu_position'	      => 7,
+		'menu_icon'           => 'dashicons-whatsapp',
+		'supports'            => array('title', 'thumbnail', 'custom-fields'),
+		/* options supplémentaires */
+		'show_in_rest' 	      => true,
+		'hierarchical'        => false,
+		'public'              => true,
+		'has_archive'         => true,
+		'rewrite'	      => array('slug' => 'tiers-lieux'),
+	);
+	register_post_type('contact', $args);
+
+
+	/*______________________CREATE CUSTOM TAXONOMY____________________*/
+
+	/*_____FORMATIONS________*/
+
+	$labels = array(
+		'name' => 'Thématiques',
+		'new_item_name' => 'Nouvelle thématique',
+		'parent_item' => 'Thématique parentes',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_in_rest' => true,
+		'hierarchical' => true,
+	);
+	register_taxonomy('thematique', 'formations', $args);
+
+	/*_____AVIS_____*/
+
+	$labels = array(
+		'name' => 'Auteur',
+		'new_item_name' => 'Type de l\'auteur',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_in_rest' => true,
+		'hierarchical' => true,
+	);
+	register_taxonomy('auteur', 'avis', $args);
 }
 
 add_action('init', 'wpm_custom_post_type', 0);
@@ -408,6 +442,9 @@ function wpm_change_title_cpt($title)
 	} elseif ('tiers-lieux' == $screen->post_type) {
 		$title = 'Entrez le nom du Tiers-Lieux';
 		return $title;
+	} elseif ('contact' == $screen->post_type) {
+		$title = 'Entrez le moyen de contact';
+		return $title;
 	}
 }
 add_filter('enter_title_here', 'wpm_change_title_cpt');
@@ -420,7 +457,7 @@ function my_theme_enqueue_styles()
 
 	//My custom JS
 	wp_enqueue_script('carousel-js', get_template_directory_uri() . '/assets/js/carousel-js.js', array(), '1.0.0');
-	
+
 	//My custom CSS
 	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
 	wp_register_style('advices_caroussel-css', get_template_directory_uri() . '/assets/css/advices_carousel.css', '1.0.0');
@@ -452,48 +489,9 @@ function shortcode_carousel_TL()
 			</div>
 		<? endwhile; ?>
 	</div>
-<?
-}
-add_shortcode('tiers-lieux_caroussel', 'shortcode_carousel_TL');
-
-function shortcode_carousel_Advices()
-{ ?>
-	<div id="adviceCaroussel">
-		<?
-		$params = array('post_type' => 'avis', 'orderby' => 'post_date', 'terms' => 'stagiaire');
-		$advices = new WP_Query($params);
-		$slugDesired = "stagiaire";
-		$theField = 'avis_nameFormation';
-
-		if (!$advices->have_posts())
-			return false;
-		else while ($advices->have_posts()) : $advices->the_post();
-			$terms = get_the_terms($advices->ID, 'auteur');
-		?>
-			<div class="element">
-				<div class="avis">
-					<h2 class="formation_name"><? echo the_field($theField) ?></h2>
-					<div class="content">
-						<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
-						<p class="the_field"><? echo the_field('avis_content') ?></p>
-						<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
-					</div>
-					<div class="author">
-						<? if ($terms[0]->slug === $slugDesired) { ?>
-							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
-						<? } else { ?>
-							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
-
-						<? } ?>
-						<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
-					</div>
-				</div>
-			</div>
-		<? endwhile; ?>
-	</div>
 	<?
 }
-add_shortcode('advices_caroussel', 'shortcode_carousel_Advices');
+add_shortcode('tiers-lieux_caroussel', 'shortcode_carousel_TL');
 
 function shortcode_Advices($atts)
 {
@@ -540,3 +538,61 @@ function shortcode_Advices($atts)
 	endwhile;
 }
 add_shortcode('advices', 'shortcode_Advices');
+
+function shortcode_contact_element()
+{
+	/**
+	 * Créer un CPT contact 
+	 * Requeter sur le CPT Contact pour récupérer en un tableau les éléments voulue 
+	 * 
+	 * Créer une div contact fixed rigth 0 
+	 * div tel background rose avec picto tel
+	 * div mail background rose avec picto mail
+	 * 
+	 * Au clic div plus large
+	 * Affiche l'élement
+	 * Au clic div rétrécis
+	 * 
+	 */
+}
+add_shortcode('contact_element', 'shortcode_contact_element');
+
+/* 
+function shortcode_carousel_Advices()
+{ ?>
+	<div id="adviceCaroussel">
+		<?
+		$params = array('post_type' => 'avis', 'orderby' => 'post_date', 'terms' => 'stagiaire');
+		$advices = new WP_Query($params);
+		$slugDesired = "stagiaire";
+		$theField = 'avis_nameFormation';
+
+		if (!$advices->have_posts())
+			return false;
+		else while ($advices->have_posts()) : $advices->the_post();
+			$terms = get_the_terms($advices->ID, 'auteur');
+		?>
+			<div class="element">
+				<div class="avis">
+					<h2 class="formation_name"><? echo the_field($theField) ?></h2>
+					<div class="content">
+						<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+						<p class="the_field"><? echo the_field('avis_content') ?></p>
+						<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+					</div>
+					<div class="author">
+						<? if ($terms[0]->slug === $slugDesired) { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
+						<? } else { ?>
+							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
+
+						<? } ?>
+						<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
+					</div>
+				</div>
+			</div>
+		<? endwhile; ?>
+	</div>
+	<?
+}
+add_shortcode('advices_caroussel', 'shortcode_carousel_Advices'); */

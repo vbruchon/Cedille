@@ -9,23 +9,35 @@ class Caroussel {
             infinite: true,
             autoPlayer: true
         }, options);
-        console.log(this.element);
         this.isMobile = false
         this.isTablett = false
         this.currentItem = 5
 
-        let children = [].slice.call(element.children)
+        let children = [].slice.call(this.element.children)
         this.root = this.createDivWithClass('caroussel')
         this.container = this.createDivWithClass('caroussel_container')
         this.root.appendChild(this.container)
         this.element.appendChild(this.root)
         this.moveCallbacks = []
-
         this.items = children.map((child) => {
             let item = this.createDivWithClass('caroussel_item')
             item.appendChild(child)
             return item
         })
+        /*         if (this.element === '<div id="container">') {
+                    this.items = children.map((child) => {
+                        let item = this.createDivWithClass('caroussel_item')
+                        item.appendChild(child)
+                        return item
+                    })
+                } else {
+                    this.items = children.map((child) => {
+                        let item = this.createDivWithClass('caroussel_element')
+                        item.appendChild(child)
+                        return item
+                    })
+                } */
+
 
         if (this.options.infinite) {
             let offset = this.options.slidesVisible * 2 - 1
@@ -172,13 +184,13 @@ class Caroussel {
  * Create caroussel element where the DOM is Loaded
  */
 document.addEventListener('DOMContentLoaded', function () {
-    /* TL */
-    new Caroussel(document.querySelector('#container'), {})
-    /* Avis */
+    let element = document.querySelector('#container')
+
+    new Caroussel(element, {})
 })
 
-document.addEventListener('DOMContentLoaded', function (){
-    new Caroussel(document.querySelector('#adviceCaroussel'), {
-        slidesVisible: 2
-    })
+document.addEventListener('DOMContentLoaded', function () {
+    let element = document.querySelector('#adviceCaroussel')
+
+    new Caroussel(element, { slidesVisible: 2 })
 })
