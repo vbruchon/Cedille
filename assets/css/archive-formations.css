@@ -1,35 +1,3 @@
-@media (max-width : 450px) {
-    .carte {
-        width: 70%;
-    }
-
-    .link_formation {
-        font-size: 90% !important;
-    }
-
-    .link_formation:hover {
-        font-size: 105% !important;
-    }
-}
-
-@media (min-width : 451px) and (max-width : 767px) {
-    .carte {
-        width: 50%;
-    }
-}
-
-@media (min-width : 768px) and (max-width : 1100px) {
-    .carte {
-        width: 40%;
-    }
-}
-
-@media (min-width : 1101px) {
-    .carte {
-        width: 28%;
-    }
-}
-
 @media screen {
     main {
         margin-left: 5% !important;
@@ -53,9 +21,28 @@
     }
 
     #filterbar {
-        background-color: red;
-        width: 60%;
         margin: 3% auto;
+    }
+
+    #filterbar h3 {
+        font-size: 100%;
+        text-align: center;
+    }
+
+    #formFilter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #formFilter select{
+        width: 60%;
+        margin-right: 3%;
+    }
+
+    #formFilter input{
+        width: 10%;
+        font-size: 120%;
     }
 
     #carte_Formation {
@@ -112,5 +99,37 @@
         height: auto;
         margin-right: 7%;
         margin-bottom: 2%;
+    }
+}
+
+@media (max-width : 450px) {
+    .carte {
+        width: 70%;
+    }
+
+    .link_formation {
+        font-size: 90% !important;
+    }
+
+    .link_formation:hover {
+        font-size: 105% !important;
+    }
+}
+
+@media (min-width : 451px) and (max-width : 767px) {
+    .carte {
+        width: 50%;
+    }
+}
+
+@media (min-width : 768px) and (max-width : 1100px) {
+    .carte {
+        width: 40%;
+    }
+}
+
+@media (min-width : 1101px) {
+    .carte {
+        width: 28%;
     }
 }
