@@ -246,7 +246,7 @@ function wpm_custom_post_type()
 	/*______________________CREATE Custom Post Type____________________*/
 
 	/*_____FORMATIONS________*/
-	
+
 	$labels = array(
 		'name' => _x('Formations', 'Post Type General Name'),
 		'singular_name'       => _x('Formation', 'Post Type Singular Name'),
@@ -314,7 +314,7 @@ function wpm_custom_post_type()
 	register_post_type('tiers-lieux', $args);
 
 	/*_____AVIS_____*/
-	
+
 	$labels = array(
 		'name' => _x('Avis', 'Post Type General Name'),
 		'singular_name'       => _x('Avis', 'Post Type Singular Name'),
@@ -534,7 +534,7 @@ function shortcode_Advices($atts)
 					</div>
 				</div>
 			</div>
-	<?
+		<?
 	endwhile;
 }
 add_shortcode('advices', 'shortcode_Advices');
@@ -557,42 +557,24 @@ function shortcode_contact_element()
 }
 add_shortcode('contact_element', 'shortcode_contact_element');
 
-/* 
-function shortcode_carousel_Advices()
-{ ?>
-	<div id="adviceCaroussel">
-		<?
-		$params = array('post_type' => 'avis', 'orderby' => 'post_date', 'terms' => 'stagiaire');
-		$advices = new WP_Query($params);
-		$slugDesired = "stagiaire";
-		$theField = 'avis_nameFormation';
 
-		if (!$advices->have_posts())
-			return false;
-		else while ($advices->have_posts()) : $advices->the_post();
-			$terms = get_the_terms($advices->ID, 'auteur');
+function shortcode_filterbar()
+{
+	//Requetes sur les thematiques 
+	$thematiques = get_terms('thematique', array('hide_empty' => false));
+
+	//Formulaire
 		?>
-			<div class="element">
-				<div class="avis">
-					<h2 class="formation_name"><? echo the_field($theField) ?></h2>
-					<div class="content">
-						<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
-						<p class="the_field"><? echo the_field('avis_content') ?></p>
-						<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
-					</div>
-					<div class="author">
-						<? if ($terms[0]->slug === $slugDesired) { ?>
-							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
-						<? } else { ?>
-							<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
-
-						<? } ?>
-						<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
-					</div>
-				</div>
-			</div>
-		<? endwhile; ?>
-	</div>
+		<form action="" method="get">
+			<label for="select">Choisir une thématique</label>
+			<select name="thematique" id="thematique">
+				<option value="all" selected>Toutes les formations</option>
+				<? foreach ($thematiques as $term) : ?>
+					<option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
+				<? endforeach ?>
+			</select>
+			<input type="submit" value="Filtrer">
+		</form>
 	<?
 }
-add_shortcode('advices_caroussel', 'shortcode_carousel_Advices'); */
+add_shortcode('filterbar', 'shortcode_filterbar');
