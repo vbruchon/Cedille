@@ -244,47 +244,33 @@ $othersFormation = new WP_Query($params);
             if (window.scrollY >= 210) {
               slidebar.classList.add(pcClassFix);
               content.classList.add(ContentClassAfterFix);
-            } else if (window.scrollY <= 209) {
-              if (slidebar.className !== "") {
+            }
+            if (window.scrollY <= 209) {
+              if (slidebar.className === pcClassFix) {
                 slidebar.classList.remove(slidebar.className)
               }
-              if (content.className !== "") {
+              if (content.className === ContentClassAfterFix ) {
                 content.classList.remove(content.className)
               }
             }
           })
         }
 
-        /* Block sidebar sur la at the bottom Page  
-                if (isTablett || isPC) {
-                  window.addEventListener('scroll', () => {
+        if (isTablett || isPC) {
+          window.addEventListener('scroll', () => {
+            let downPageDistance = window.scrollMaxY * 5 / 100
+            let resultOfDownPageAndDistance = window.scrollMaxY - downPageDistance
 
-                    if (window.scrollY >= calculNbrePXBetweenAPointAndDownPage()) {
-                      slidebar.classList.add(slidebarTablettDownPage)
-                      slidebar.classList.remove(tablettClassFix)
-                    } else if (slidebar.className !== "") {
-                      slidebar.classList.remove(slidebarTablettDownPage)
-                    }
-                    slidebar.classList.add(tablettClassFix)
-                  })
-
-                } */
-
+            if (window.scrollY >= resultOfDownPageAndDistance) {
+              slidebar.classList.add(slidebarTablettDownPage)
+              slidebar.classList.remove(tablettClassFix)
+            } else if (slidebar.className !== "") {
+              slidebar.classList.remove(slidebarTablettDownPage)
+            }
+            slidebar.classList.add(tablettClassFix)
+          })
+        }
       })
-
-
-
-      /**
-       * Calcule le nombre de px entre une distance donnée et le bas de la page
-       */
-      function calculNbrePXBetweenAPointAndDownPage() {
-        let downPageDistance = window.scrollMaxY * 10 / 100
-        let resultOfDownPageAndDistance = window.scrollMaxY - downPageDistance
-
-        console.log("calcul : " + downPageDistance);
-
-        return resultOfDownPageAndDistance
-      }
     </script>
     <footer>
       <? get_footer() ?>

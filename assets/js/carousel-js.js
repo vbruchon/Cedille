@@ -1,6 +1,4 @@
 class Caroussel {
-
-
     constructor(element, options = {}) {
         this.element = element;
         this.options = Object.assign({}, {
@@ -24,20 +22,6 @@ class Caroussel {
             item.appendChild(child)
             return item
         })
-        /*         if (this.element === '<div id="container">') {
-                    this.items = children.map((child) => {
-                        let item = this.createDivWithClass('caroussel_item')
-                        item.appendChild(child)
-                        return item
-                    })
-                } else {
-                    this.items = children.map((child) => {
-                        let item = this.createDivWithClass('caroussel_element')
-                        item.appendChild(child)
-                        return item
-                    })
-                } */
-
 
         if (this.options.infinite) {
             let offset = this.options.slidesVisible * 2 - 1
@@ -152,8 +136,8 @@ class Caroussel {
     }
 
     resizeWindow() {
-        let mobile = window.innerWidth < 600
-        let tablett = window.innerWidth < 900
+        let mobile = window.innerWidth < 800
+        let tablett = window.innerWidth < 1100
 
         if (mobile !== this.isMobile) {
             this.isMobile = mobile
@@ -185,12 +169,15 @@ class Caroussel {
  */
 document.addEventListener('DOMContentLoaded', function () {
     let element = document.querySelector('#container')
-
     new Caroussel(element, {})
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-    let element = document.querySelector('#adviceCaroussel')
+    let element = document.querySelector('#adviceCaroussel_Stagiaire')
+    new Caroussel(element, { slidesVisible: 2 })
+})
 
+document.addEventListener('DOMContentLoaded', function () {
+    let element = document.querySelector('#adviceCaroussel_Formateur')
     new Caroussel(element, { slidesVisible: 2 })
 })
