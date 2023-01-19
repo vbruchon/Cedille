@@ -36,12 +36,20 @@
     }
 
     #formFilter select{
-        width: 60%;
-        margin-right: 3%;
+        width: 90%;
+        margin: 3%;
+        background-color: #fff4ea;
+        border: 2px solid #37827a;
+        text-align: center;
+        color: #37827a;
+        font-weight: bolder;
+    }
+    #formFilter option:hover{
+        background-color: #5ccbc3;
     }
 
     #formFilter input{
-        width: 10%;
+        width: 35%;
         font-size: 120%;
     }
 
@@ -114,11 +122,20 @@
     .link_formation:hover {
         font-size: 105% !important;
     }
+
+    #formFilter select{
+        width: 65%;
+    }
+
 }
 
 @media (min-width : 451px) and (max-width : 767px) {
     .carte {
         width: 50%;
+    }
+
+    #formFilter select{
+        width: 65%;
     }
 }
 
@@ -131,5 +148,16 @@
 @media (min-width : 1101px) {
     .carte {
         width: 28%;
+    }
+
+
+    #formFilter select{
+        width: 60%;
+        margin: 0 3% 0 0;
+    }
+
+    #formFilter input{
+        width: 20%;
+        font-size: 120%;
     }
 }

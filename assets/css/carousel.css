@@ -1,5 +1,5 @@
 #container {
-    margin: 5% 0%;
+    margin-top: 5%;
 }
 
 .caroussel {
@@ -20,14 +20,13 @@
     transition: transform .1s;
 }
 
-#container .element img{
+#container .element img {
     border-radius: 20%;
     padding: 0 2%;
 }
 
-.element:hover{
-    transform: scale(1.1);
-    border-radius: 10%;
+#container .element:hover {
+    width: 350px !important;
 }
 
 .caroussel_next,
@@ -43,77 +42,97 @@
 
 .caroussel_prev {
     right: auto;
-    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/previous.png") ;
+    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/previous.png");
     background-size: 100%;
 }
 
-.caroussel_next{
-    background:center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/next.png");
+.caroussel_next {
+    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/next.png");
     background-size: 100%;
-    right: 0 
+    right: 0
 }
 
-.caroussel_next:hover, .caroussel_prev:hover{
+.caroussel_next:hover,
+.caroussel_prev:hover {
     transform: scale(1.2);
 }
 
-#adviceCaroussel{
-    margin: 5% 0%;
+#adviceCaroussel {
+    margin-top: 5%;
 }
 
-#adviceCaroussel
-.avis{
-  border-radius: 10%;
-  padding: 0 2%;
-  background-color: #fff4ea;
-  width: 115%;
+.avis_Stagiaire,
+.avis_Formateur {
+    border-radius: 10%;
+    padding: 0 2%;
+    width: 80%;
+    margin-left: 10%;
+    height: auto;
+}
+
+.avis_Stagiaire {
+    background-color: #fff4ea;
+}
+
+.avis_Formateur {
+    background-color: #ffff;
+    margin-top: 2%;
 }
 
 #adviceCaroussel .element {
-  width: 70%;
-  height: auto;
-  transition: transform .1s;
+    width: 70%;
+    height: auto;
+    transition: transform .1s;
+    margin-top: 3%;
 }
 
 
-.formation_name{
-  font-size: 120%;
-  text-align : center;
-  padding: 5% 0 0 0;
-  }
+.formation_name {
+    font-size: 120%;
+    text-align: center;
+    padding: 5% 0 0 0;
+}
 
-  .content{
-  width: 90%;
-  }
- 
-  .content p{
-  text-align : center;
-  }
+.content {
+    width: 90%;
+}
 
-  .img2{
-  margin-left: 100%;
-  }
+.content p {
+    text-align: center;
+}
 
-  .author{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 5%;
-  }
-  
-  .author_icone, .author_name{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  }
-  
-  .author_icone{
-  width: 15%;
-  height: 15% !important;
-  margin-right: 5%;
-  }
+.img2 {
+    margin-left: 100%;
+}
 
-  .author_name{
-  margin-top: 10%;
-  } 
-  
+.author {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 5%;
+}
+
+.author_icone,
+.author_name {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.author_icone {
+    width: 15%;
+    height: 15% !important;
+    margin-right: 5%;
+}
+
+.author_name {
+    margin-top: 10%;
+}
+
+@media (min-width: 800px) and (max-width: 1100) {
+
+    .avis_Stagiaire,
+    .avis_Formateur {
+        height: 90%;
+    }
+}
