@@ -38,7 +38,7 @@ $terms = get_the_terms($my_posts->ID, 'thematique');
     </header>
 
     <main>
-    <? echo do_shortcode("[contact_element]"); ?>
+        <? echo do_shortcode("[contact_element]"); ?>
         <div class="global_css">
             <h1 id="archive_formation_title">Nos Formations</h1>
 
