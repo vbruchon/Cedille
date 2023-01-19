@@ -457,9 +457,11 @@ function my_theme_enqueue_styles()
 
 	//My custom JS
 	wp_enqueue_script('carousel-js', get_template_directory_uri() . '/assets/js/carousel-js.js', array(), '1.0.0');
+	wp_enqueue_script('caroussel-advices-js', get_template_directory_uri() . '/assets/js/caroussel-advices-js.js', array(), '1.0.0');
 
 	//My custom CSS
 	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	wp_register_style('all-thematique-css', get_template_directory_uri() . '/assets/css/all-thematique.css', '1.0.0');
 	wp_register_style('contact-css', get_template_directory_uri() . '/assets/css/contact-css.css', '1.0.0');
 	wp_register_style('archive-formations-css', get_template_directory_uri() . '/assets/css/archive-formations.css', '1.0.0');
 	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
@@ -467,7 +469,10 @@ function my_theme_enqueue_styles()
 	// Enqueue all CSS & JS files
 	wp_enqueue_script('jquery-min-js');
 	wp_enqueue_script('carousel-js');
+	wp_enqueue_script('caroussel-advices-js');
+
 	wp_enqueue_style('carousel-css');
+	wp_enqueue_style('all-thematique-css');
 	wp_enqueue_style('contact-css');
 	wp_enqueue_style('archive-formations-css');
 	wp_enqueue_style('single-formations-css');
@@ -507,25 +512,28 @@ function shortcode_Advices($atts)
 		'terms' => $a['auteur']
 	);
 	//J'ajoute à mes params ma tax_query comportant en term le paramètre saisie par le user
-	$params = array('post_type' => 'avis', 'tax_query' => array($tax_query), 'post_per_page' => 4);
+	$params = array('post_type' => 'avis', 'tax_query' => array($tax_query));
 	//Je fais ma requête en lui passant les params créer
 	$advices = new WP_Query($params);
 
-
-	if (!$advices->have_posts())
+	if (!$advices->have_posts()) :
 		return "Aucun avis trouvé";
-	else while ($advices->have_posts()) : $advices->the_post();
+	else :
 		if ($a['auteur'] === "Stagiaire") {
 			echo '<div id="adviceCaroussel_Stagiaire">';
 		} else {
 			echo '<div id="adviceCaroussel_Formateur">';
 		}
-
-
-
+		for ($i = 0; $i !== 4; $i++) {
+			while ($advices->have_posts()) : $advices->the_post();
+				if ($a['auteur'] === "Stagiaire") {
+					echo '<div class="element">';
+					echo '<div class="avis_Stagiaire">';
+				} else {
+					echo '<div class="element">';
+					echo '<div class="avis_Formateur">';
+				}
 	?>
-		<div class="element">
-			<div class="avis">
 				<h2 class="formation_name"><? echo the_field($formationName) ?></h2>
 				<div class="content">
 					<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
@@ -537,14 +545,15 @@ function shortcode_Advices($atts)
 						<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
 					<? } else { ?>
 						<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
-
 					<? } ?>
 					<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
 				</div>
-			</div>
-		</div>
-	<?
-	endwhile;
+				</div>
+				</div>
+	<? endwhile;
+		}
+
+	endif;
 	?>
 	<script src="./assets/js/carousel-js.js"></script>
 <?
@@ -553,19 +562,6 @@ add_shortcode('advices', 'shortcode_Advices');
 
 function shortcode_contact_element()
 {
-	/**
-	 * Créer un CPT contact 
-	 * Requeter sur le CPT Contact pour récupérer en un tableau les éléments voulue 
-	 * 
-	 * Créer une div contact fixed rigth 0 
-	 * div tel background rose avec picto tel
-	 * div mail background rose avec picto mail
-	 * 
-	 * Au clic div plus large
-	 * Affiche l'élement
-	 * Au clic div rétrécis
-	 * 
-	 */
 ?>
 	<link rel="stylesheet" href="contact.css">
 	<?
@@ -585,82 +581,43 @@ function shortcode_contact_element()
 add_shortcode('contact_element', 'shortcode_contact_element');
 
 
-/* function shortcode_filterbar()
-{
-	//Requetes sur les thematiques 
-	$thematiques = get_terms('thematique', array('hide_empty' => false));
-
-	//Formulaire
-		?>
-		<form action="" method="get">
-			<label for="select">Choisir une thématique</label>
-			<select name="thematique" id="thematique">
-				<option value="all" selected>Toutes les formations</option>
-				<? foreach ($thematiques as $term) : ?>
-					<option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
-				<? endforeach ?>
-			</select>
-			<input type="submit" value="Filtrer">
-		</form>
-	<?
-}
-add_shortcode('filterbar', 'shortcode_filterbar'); */
-
 function shortcode_thematique_home_page()
 {
 ?>
-	<style>
-		#all-formation {
-			background-color: blue;
-		}
+	<div id="all">
 
-		.carte_thematique {
-			width: 600px;
-			height: 250px;
-			background-color: #fff4ea;
-		}
+		<?
+		$pictoThematique = [
+			'bureautique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/ordinateur.png',
+			'communication' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/le-marketing-numerique.png',
+			'cuisine' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/Frame_35_1_-removebg-preview.png',
+			'developpement-personnel' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/promotion.png',
+			'divers' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/pensez-autrement.png',
+			'graphique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/design-creatif.png',
+			'management' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/management.png',
+			'numerique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/surveiller-la-tablette-et-le-smartphone.png'
+		];
+		$thematiques = get_terms('thematique', array('hide_empty' => false, 'post_per_page' => 8));
+		$i = 0;
 
-		.picto {
-			width: 25%;
-			height: auto;
-		}
-
-		.thematique {
-			font-size: 110%;
-		}
-	</style>
-	<?
-	$thematiques = get_terms('thematique', array('hide_empty' => false));
-	$pictoThematique = [
-		'bureautique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/ordinateur.png',
-		'communication' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/le-marketing-numerique.png',
-		'cuisine' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/Frame_35_1_-removebg-preview.png',
-		'developpement-personnel' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/promotion.png',
-		'divers' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/pensez-autrement.png',
-		'graphique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/design-creatif.png',
-		'management' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/management.png',
-		'numerique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/surveiller-la-tablette-et-le-smartphone.png'
-	];
-
-	if ($thematiques === null) :
-		return false;
-	else : ?>
-		<div id="all-formation">
-			<?
-			foreach ($thematiques as $term) : ?>
-				<div class="carte_thematique">
+		foreach ($thematiques as $t) :
+			if ($i !== 8) :
+		?>
+				<div class="card">
 					<div class="picto">
-						<? print_r($pictoThematique[$term->slug]) ?>
+						<img src="<? echo ($pictoThematique[$t->slug]) ?>" alt="picto " + <? echo ($pictoThematique[$t->slug]) ?>>
 					</div>
-					<div class="thematique">
-						<? echo $term->slug ?>
+
+					<div class="term">
+						<? echo $t->name ?>
 					</div>
 				</div>
-			<?
-			endforeach;
-			?>
-		</div>
+		<?
+				$i++;
+			endif;
+		endforeach;
+		?>
+	</div>
 <?
-	endif;
 }
 add_shortcode('all-thematique', 'shortcode_thematique_home_page');

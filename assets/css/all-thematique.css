@@ -1,0 +1,35 @@
+#all {
+    display: flex;
+    flex-direction: center;
+    flex-wrap: wrap;
+    width: 85%;
+    margin: 0% 10%;
+}
+
+.card {
+    width: 45%;
+    height: 250px;
+    background-color: #fff4ea;
+    border-radius: 30px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.picto {
+    width: 20%;
+    height: auto;
+    margin: 0 6%;
+}
+
+.term {
+    font-size: 110%;
+}
+@media (max-width: 767px){
+    .card{
+        width: 100%;
+    }
+}
+
+/* @media (min-width: ) */
