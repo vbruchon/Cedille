@@ -47,10 +47,14 @@ $othersFormation = new WP_Query($params);
   </header>
   <div class="global_css">
 
+
+
+
     <body>
       <div id="single_formation_titre">
         <h2>PROGRAMME DE LA FORMATION</h2>
       </div>
+
       <main id="single_formation_main">
 
         <div id="single_formation_sidebar_left">
@@ -96,7 +100,7 @@ $othersFormation = new WP_Query($params);
               <h2>PROFIL DU PUBLIC CONCERNÉ</h2>
             </div>
             <h3>TYPE DE PUBLIC</h3>
-            <p><? echo get_post_meta($post->ID, 'type_public', true) ?></p>
+            <p><? echo wpautop(get_post_meta($post->ID, 'type_public', true)) ?></p>
             <br />
             <h3>PRÉ-REQUIS</h3>
             <p><? echo get_post_meta($post->ID, 'pre-requis', true) ?></p>
@@ -134,27 +138,27 @@ $othersFormation = new WP_Query($params);
               <img class="single_formation_icone" src="<? echo $icone['evaluations'] ?>" alt="point relié par un trait à un drapeau">
               <h2>SUIVI & ÉVALUATIONS</h2>
             </div>
-            <p><? echo get_post_meta($post->ID, 'suivi_&_evaluations', true) ?></p>
+            <p><? echo get_post_meta($post->ID, 'evaluation', true) ?></p>
           </div>
 
           <div class="single_formation_block">
             <div class="single_formation_block_title">
-              <img class="single_formation_icone" src="<? echo $icone['access_time'] ?>" alt="Horloge">
+              <img class="single_formation_icone2" src="<? echo $icone['access_time'] ?>" alt="Horloge">
               <h2>DÉLAI D'ACCÉS</h2>
             </div>
-            <p><? echo get_post_meta($post->ID, 'delai_dacces', true) ?></p>
+            <p><? echo get_post_meta($post->ID, 'delai_acces', true) ?></p>
           </div>
 
           <div class="single_formation_block">
             <div class="single_formation_block_title">
-              <img class="single_formation_icone" src="<? echo $icone['accessibilites'] ?>" alt="Logo accessibilités (personnage bland entoourré d'un riond)">
+              <img class="single_formation_icone2" src="<? echo $icone['accessibilites'] ?>" alt="Logo accessibilités (personnage bland entoourré d'un riond)">
               <h2>ACCESSIBILITÉS</h2>
             </div>
             <p><? echo get_post_meta($post->ID, 'accessibilites', true) ?></p>
           </div>
 
-          <div class="single_formation_block_title">
-            <img class="single_formation_icone2" src="<? echo $icone['others'] ?>" alt="icône de 3 classeurs">
+          <div class="single_formation_block_title_formation">
+            <img class="single_formation_icone3" src="<? echo $icone['others'] ?>" alt="icône de 3 classeurs">
             <h2>Ces formations peuvent vous intéresser : </h2>
           </div>
 
@@ -183,95 +187,118 @@ $othersFormation = new WP_Query($params);
             <?php endif; ?>
 
           </div>
+          <div id="downpage" syle="height:20px; background-color:red;">Hello</div>
         </div>
       </main>
+      <script>
+        const sidebar = document.getElementById('single_formation_sidebar_left');
+        const prog = document.getElementById("single_formation_titre");        
+
+        const content = document.getElementById("single_formation_content");
+        const contentAfterFix = "single_formation_content_after_fix";
+
+
+        const isMobile = window.innerWidth <= 767;
+        const mobileClass = "sidebar_mobile";
+
+        const lengthTablettMin = window.innerWidth >= 768;
+        const lengthTablettMax = window.innerWidth <= 1100;
+        const isTablett = lengthTablettMin & lengthTablettMax;
+        const tablettClass = "sidebar_tablett";
+
+        const isDesktop = window.innerWidth > 1101;
+        const pcClass = "sidebar_pc";
+
+        const footer = document.querySelector('footer')
+
+
+        /* TEST POUR ARRETER LA SIDEBAR AVANT LE FOOTER*/
+        function footerIsInView (footer) {
+          
+          console.log("footer = " + footer);
+
+          //position verticale de la barre de défilement de la fenêtre du navigateur
+          const scroll = window.scrollY || window.pageYOffset;
+          console.log("scroll = " + scroll);
+
+          // distance entre le haut de {el} et le haut de la fenêtre du navigateur
+          const boundsTop = footer.getBoundingClientRect().top + scroll;
+          console.log("boundsTop = " + boundsTop);
+
+
+          //limites de la zone visible de la fenêtre
+          const viewport = {
+            top: scroll,
+            bottom: scroll + window.innerHeight,
+          };
+          console.log("viewport = " + viewport);
+
+
+          //limites de l'élément ciblé par rapport à la fenêtre du navigateur.
+          const bounds = {
+            //distance en pixels entre le haut de l'élément et le haut de la fenêtre du navigateur
+            top: boundsTop,
+            //distance en pixels entre le bas de l'élément et le haut de la fenêtre du navigateur
+            bottom: boundsTop + footer.clientHeight,
+          };
+          console.log("bounds = " + bounds);
+
+
+          //Si la dsitance entre ke bas de l'élément et le haut de lafenêtre est suppérieur à la zone visible du hatu de la fenêtre &
+          //Si le a distance du bas de el et le haut de viewport est inférieur à la zone visible basse de la fenêtre
+          if (bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom) {
+            console.log("sidebar en static");
+            //le haut de el inférieur à zone visible basse & le haut est supérieur à visible haut
+          } else if (bounds.top <= viewport.bottom && bounds.top >= viewport.top) {
+            console.log("sidebar en static");
+          } else {
+            console.log("sidebar en fixed");
+          } 
+        };
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+          if (isMobile) {
+            sidebar.classList.add(mobileClass)
+            let mt = sidebar.offsetHeight;
+            prog.style.marginTop = mt + "px";
+
+          } else if (isTablett) {
+            prog.style.marginTop = 0
+            window.addEventListener('scroll', () => {
+              if (window.scrollY >= 114) {
+                sidebar.classList.add(tablettClass);
+                content.classList.add(contentAfterFix)
+              } else if (window.scrollY <= 113) {
+                if (sidebar.className === tablettClass) {
+                  sidebar.classList.remove(sidebar.className)
+                }
+                if (content.className === contentAfterFix) {
+                  content.classList.remove(content.className)
+                }
+              }
+              footerIsInView (footer)
+            })
+          } else if (isDesktop) {
+            prog.style.marginTop = 0
+            window.addEventListener('scroll', () => {
+              if (window.scrollY >= 210) {
+                sidebar.classList.add(pcClass);
+                content.classList.add(contentAfterFix);
+              } else if (window.scrollY <= 209) {
+                if (sidebar.className === pcClass) {
+                  sidebar.classList.remove(sidebar.className)
+                }
+                if (content.className === contentAfterFix) {
+                  content.classList.remove(content.className)
+                }
+              }
+              footerIsInView (footer)
+            });
+          }
+        })
+      </script>
     </body>
-    <script>
-      let slidebar = document.getElementById('single_formation_sidebar_left');
-      let content = document.getElementById("single_formation_content");
-
-      let mobileClass = "slidebar_mobile";
-      let MobileClassFix = "slidebar_mobile_fix";
-
-      let tablettClassFix = "slidebar_tablett_fix";
-      let ContentClassAfterFix = "single_formation_content_after_fix";
-      let slidebarTablettDownPage = "single_formation_sidebar_isDownPage";
-
-      let pcClassFix = "sidebar_pc_fix";
-
-      let lengthTablettMin = window.innerWidth >= 768;
-      let lengthTablettMax = window.innerWidth <= 1100;
-
-      let isMobile = window.innerWidth <= 767;
-      let isTablett = lengthTablettMin & lengthTablettMax;
-      let isPC = window.innerWidth > 1101;
-
-
-
-      /**
-       * Change CSS Class depending on the screen size
-       */
-      document.addEventListener('DOMContentLoaded', () => {
-        if (isMobile) {
-          slidebar.classList.add(mobileClass)
-          window.addEventListener('scroll', () => {
-            if (window.scrollY >= 250) {
-              slidebar.classList.remove(mobileClass);
-              slidebar.classList.add(MobileClassFix);
-            } else {
-              if (slidebar.className !== mobileClass) {
-                slidebar.classList.remove(slidebar.className);
-                slidebar.className = mobileClass;
-              }
-            }
-          })
-        } else if (isTablett) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY >= 114) {
-              slidebar.classList.add(tablettClassFix);
-              content.classList.add(ContentClassAfterFix);
-            } else if (window.scrollY <= 113) {
-              if (slidebar.className !== "") {
-                slidebar.classList.remove(slidebar.className)
-              }
-              if (content.className !== "") {
-                content.classList.remove(content.className)
-              }
-            }
-          })
-        } else if (isPC) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY >= 210) {
-              slidebar.classList.add(pcClassFix);
-              content.classList.add(ContentClassAfterFix);
-            }
-            if (window.scrollY <= 209) {
-              if (slidebar.className === pcClassFix) {
-                slidebar.classList.remove(slidebar.className)
-              }
-              if (content.className === ContentClassAfterFix ) {
-                content.classList.remove(content.className)
-              }
-            }
-          })
-        }
-
-        if (isTablett || isPC) {
-          window.addEventListener('scroll', () => {
-            let downPageDistance = window.scrollMaxY * 5 / 100
-            let resultOfDownPageAndDistance = window.scrollMaxY - downPageDistance
-
-            if (window.scrollY >= resultOfDownPageAndDistance) {
-              slidebar.classList.add(slidebarTablettDownPage)
-              slidebar.classList.remove(tablettClassFix)
-            } else if (slidebar.className !== "") {
-              slidebar.classList.remove(slidebarTablettDownPage)
-            }
-            slidebar.classList.add(tablettClassFix)
-          })
-        }
-      })
-    </script>
     <footer>
       <? get_footer() ?>
     </footer>
@@ -279,46 +306,5 @@ $othersFormation = new WP_Query($params);
 </body>
 
 </html>
+<?
 
-
-
-<!--  window.addEventListener('DOMContentLoaded', () => {
-        if (isMobile) {
-          slidebar.classList.add(mobileClass)
-          window.addEventListener('scroll', () => {
-            if (window.scrollY >= 250) {
-              slidebar.classList.remove(mobileClass)
-              slidebar.classList.add(newMobileClass)
-            } else {
-              if (slidebar.className !== mobileClass) {
-                slidebar.classList.remove(slidebar.className)
-                slidebar.className = mobileClass
-              }
-            }
-          })
-        } else if (isTablett) {
-          window.addEventListener('scroll', () => {
-            if (window.scrollY >= 114) {
-              slidebar.classList.add(tablettClass)
-              content.classList.add(tablettContentClass)
-            } else {
-              slidebar.classList.remove(slidebar.className)
-              content.classList.remove(content.className)
-            }
-
-            let downPageDistance = window.scrollMaxY * 10 / 100
-            let resultOfDownPageAnddownPageDistance = window.scrollMaxY - calcul
-            console.log("calcul : " + downPageDistance);
-            console.log("result : " + resultOfDownPageAnddownPageDistance);
-
-            if (window.scrollY >= result) {
-              slidebar.classList.add(slidebarTablettDownPage)
-              slidebar.classList.remove(tablettClass)
-            } else {
-              slidebar.classList.remove(slidebarTablettDownPage)
-              slidebar.classList.add(tablettClass)
-            }
-          })
-        }
-      })
-    </script> -->
