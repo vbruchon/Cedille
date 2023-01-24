@@ -5,6 +5,12 @@
     width: 85%;
     margin: 0% 10%;
 }
+#all .card a {
+    color: #37827a !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .card {
     width: 45%;
@@ -31,5 +37,3 @@
         width: 100%;
     }
 }
-
-/* @media (min-width: ) */

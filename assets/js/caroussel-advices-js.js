@@ -1,6 +1,6 @@
 class CarousselAdvices extends Caroussel {
     infinite_slide() {
-        let offset = this.options.slidesVisible - 1;
+        let offset = Math.ceil(this.items.length / this.options.slidesVisible);
         if (offset > this.items.length) {
             offset = this.items.length - 1;
         }
@@ -15,10 +15,10 @@ class CarousselAdvices extends Caroussel {
 
 document.addEventListener('DOMContentLoaded', function () {
     let element = document.querySelector('#adviceCaroussel_Stagiaire')
-    new Caroussel(element, { slidesVisible: 2 })
+    new CarousselAdvices(element, { slidesVisible: 2 })
 })
 
 document.addEventListener('DOMContentLoaded', function () {
     let element = document.querySelector('#adviceCaroussel_Formateur')
-    new Caroussel(element, { slidesVisible: 2 })
+    new CarousselAdvices(element, { slidesVisible: 2 })
 })

@@ -465,6 +465,7 @@ function my_theme_enqueue_styles()
 	wp_register_style('contact-css', get_template_directory_uri() . '/assets/css/contact-css.css', '1.0.0');
 	wp_register_style('archive-formations-css', get_template_directory_uri() . '/assets/css/archive-formations.css', '1.0.0');
 	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
+	wp_register_style('carouselAdvices-css', get_template_directory_uri() . '/assets/css/carouselAdvices-css.css', '1.0.0');
 
 	// Enqueue all CSS & JS files
 	wp_enqueue_script('jquery-min-js');
@@ -472,6 +473,7 @@ function my_theme_enqueue_styles()
 	wp_enqueue_script('caroussel-advices-js');
 
 	wp_enqueue_style('carousel-css');
+	wp_enqueue_style('carouselAdvices-css');
 	wp_enqueue_style('all-thematique-css');
 	wp_enqueue_style('contact-css');
 	wp_enqueue_style('archive-formations-css');
@@ -601,16 +603,19 @@ function shortcode_thematique_home_page()
 		$i = 0;
 
 		foreach ($thematiques as $t) :
+
 			if ($i !== 8) :
 		?>
 				<div class="card">
-					<div class="picto">
-						<img src="<? echo ($pictoThematique[$t->slug]) ?>" alt="picto " + <? echo ($pictoThematique[$t->slug]) ?>>
-					</div>
+					<a href="<? echo get_term_link($t) ?>">
+						<div class="picto">
+							<img src="<? echo ($pictoThematique[$t->slug]) ?>" alt="picto " + <? echo ($pictoThematique[$t->slug]) ?>>
+						</div>
 
-					<div class="term">
-						<? echo $t->name ?>
-					</div>
+						<div class="term">
+							<? echo $t->name ?>
+						</div>
+					</a>
 				</div>
 		<?
 				$i++;

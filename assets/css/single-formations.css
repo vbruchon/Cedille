@@ -12,31 +12,24 @@
   #single_formation_main {
     display: flex;
     margin: 5% 10% 10% 10%;
+    height: auto;
   }
-
-
-  #single_formation_titre {
-    text-align: center;
-    margin: 6% auto 2%;
-  }
-
-
 
   #single_formation_sidebar_left {
     height: auto;
     background-color: #ffc61c;
   }
 
-  #single_formation_content {
-    /* width: 80%;
-    margin-left: 24%; */
-    width: 90%;
-    display: block;
-    margin: 5% auto;
+  #single_formation_h1 h1 {
+    text-align: center;
+  }
+
+  #single_formation_titre {
+    text-align: center;
+    margin: 0 auto 2%;
   }
 
   .single_formation_thumbnail {
-    width: 70%;
     height: auto;
     margin: 5%;
     display: block;
@@ -44,13 +37,11 @@
     margin-left: auto;
   }
 
-
-  .single_formation_block {
-    background-color: #ffff;
-    text-align: center;
-    padding: 5px;
-    margin-bottom: 15px;
-    width: 100%;
+  #slidebar_element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   #single_formation_tarif img,
@@ -66,22 +57,6 @@
     text-align: center;
   }
 
-  .single_formation_block_title {
-    display: flex;
-    margin-left: 2%;
-    margin-bottom: 1%;
-  }
-
-  .single_formation_block_title img {
-    margin-right: 2%;
-  }
-
-  .single_formation_block_title h2 {
-    margin-top: 3%;
-    font-size: 150%;
-  }
-
-
   #single_formation_bloc_contact {
     background-color: #fff4ea;
     width: 35%;
@@ -90,6 +65,26 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+  }
+
+  #single_formation_bloc_contact button:hover,
+  button:hover {
+    font-size: 125%;
+  }
+
+  .single_formation_block {
+    background-color: #ffff;
+    padding: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .single_formation_block_title,
+  .single_formation_block_title_formation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   #single_formation_carte_Formation {
@@ -112,66 +107,33 @@
     border-radius: 30px 30px 0px 0px;
   }
 
-  .slidebar_mobile {
-    width: 100%;
-    height: auto;
-    left: 0;
-    top: 250px;
-    position: absolute;
-  }
-
-  .slidebar_mobile_fix {
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-
-  .slidebar_tablett_fix {
-    position: fixed;
-    top: 150;
-    width: 22% !important;
-    margin-bottom: 10%;
-  }
-
-  #single_formation_bloc_contact button:hover,
-  button:hover {
-    font-size: 125%;
-  }
-
-  #single_formation_h1 h1 {
-    text-align: center;
-  }
-
-  #slidebar_element {
+  .single_formation_block_title {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    margin-left: 2%;
+    margin-bottom: 1%;
   }
+
+  .single_formation_block_title img {
+    margin-right: 2%;
+  }
+
+  .single_formation_block_title h2 {
+    margin-top: 3%;
+    font-size: 150%;
+  }
+
+
 }
-
-/*_____________GENERAL__________*/
-
 
 /*______________MOBILE__________*/
-@media (max-width : 435px) {
-  #single_formation_titre {
-    margin-top: 90% !important;
-  }
-}
-@media (min-width : 436px) and (max-width : 500px) {
-  #single_formation_titre {
-    margin-top: 55% !important;
-  }
-}
 @media (max-width : 500px) {
-  .single_formation_icone {
-    width: 20% !important;
-    height: 17% !important;
+  #single_formation_tarif img {
+    margin-top: 30% !important;
+    margin-left: 5% !important;
   }
 
-  .single_formation_icone2 {
-    width: 30% !important;
+  .single_formation_icone {
+    width: 20% !important;
     height: 17% !important;
   }
 
@@ -188,35 +150,30 @@
     font-size: 110%;
   }
 
-  .single_formation_carte {
-    width: 90% !important;
-  }
-}
-
-@media (min-width : 501px) and (max-width : 630px) {
-  #single_formation_titre {
-    margin-top: 48% !important;
-  }
 }
 
 @media (max-width : 767px) {
-
-  .slidebar_mobile,
-  .slidebar_mobile_fix {
-    font-size: 110%;
+  header {
+    display: none;
   }
 
-  .single_formation_carte {
-    width: 60%;
+  #single_formation_main {
+    margin: 0 !important;
   }
 
-  #single_formation_titre {
-    margin-top: 40%;
+  .sidebar_mobile {
+    width: 100%;
+    position: fixed;
+    top: 0;
+  }
+
+  .single_formation_thumbnail {
+    display: none;
   }
 
   #single_formation_h1 h1 {
     font-size: 120%;
-    margin-top: 9%;
+    margin-top: 3%;
   }
 
   #single_formation_tarif,
@@ -229,16 +186,20 @@
     font-size: 80%;
   }
 
+  #single_formation_tarif img {
+    margin-top: 25%;
+  }
+
   #single_formation_tarif img,
   #single_formation_duree img {
-    width: 30%;
+    width: 45%;
     height: auto;
     margin-left: 20%;
   }
 
   #single_formation_tarif p {
     font-size: 120%;
-    margin-top: 12%;
+    margin-left: 15%;
     width: 60%;
   }
 
@@ -248,6 +209,18 @@
     width: 75%;
   }
 
+  .single_formation_icone,
+  .single_formation_icone2 {
+    width: 10%;
+    height: 17%;
+  }
+
+  .single_formation_icone3 {
+    width: 17% !important;
+    height: 17% !important;
+    margin-right: 5%;
+  }
+
   #single_formation_bloc_contact {
     margin-top: 0;
     margin-bottom: 4px;
@@ -255,36 +228,60 @@
     width: 45%;
   }
 
-  .single_formation_thumbnail {
-    display: none;
+  #single_formation_content {
+    width: 90%;
+    display: block;
+    margin: 5% auto;
   }
 
-  .single_formation_icone,
-  .single_formation_icone2 {
-    width: 10%;
-    height: 17%;
+  #single_formation_titre {
+    margin-top: 40%;
   }
+
+  .single_formation_block_title h2 {
+    font-size: 190%;
+  }
+
+  .single_formation_block p {
+    font-size: 120%;
+  }
+
+  .single_formation_block_title_formation h2 {
+    font-size: 150%;
+  }
+
+
+
+
+
+
 
   .single_formation_carte {
     width: 60%;
   }
 
-  .single_formation_block_title {
-    font-size: 80%;
-  }
+
 }
 
-/*____________TABLETT___________*/
+/*_____________TABLETT_________*/
+
 @media (min-width : 768px) and (max-width : 1100px) {
   #single_formation_main {
     margin: 0;
   }
 
   #single_formation_sidebar_left {
-    width: 35%;
-    top: 180px;
+    width: 40%;
     font-size: 75%;
-    margin-bottom: 350px;
+    height: auto;
+  }
+
+  .sidebar_tablett {
+    width: 23.5% !important;
+    height: auto !important;
+    position: fixed;
+    top: 170px;
+    left: 5%;
   }
 
   .single_formation_thumbnail {
@@ -349,61 +346,44 @@
 
   #single_formation_content {
     width: 100%;
-    margin: 0 0 0 5%;
+    margin: 0 2% 0 5%;
+    display: block;
   }
 
   .single_formation_content_after_fix {
     width: 80% !important;
-    margin: 0 0 0 30% !important;
+    margin: 0 2% 0 30% !important;
   }
 
-  .single_formation_block_title h2 {
+  .single_formation_block_title h2,
+  .single_formation_block_title_formation h2,
+  .single_formation_carte_title {
     font-size: 140%;
   }
 
   .single_formation_icone,
   .single_formation_icone2 {
-    width: 9%;
-    height: 9%;
+    width: 12%;
+    height: 12%;
+  }
+
+  .single_formation_icone3 {
+    width: 15%;
+    margin-right: 5%;
   }
 
   .single_formation_carte {
     width: 45%;
   }
-
-  .single_formation_sidebar_isDownPage {
-    position: fixed;
-    top: 30% !important;
-    height: auto !important;
-    background-color: #ffc61a !important;
-    width: 22% !important;
-  }
-
-  .single_formation_carte_title {
-    font-size: 180%;
-  }
 }
 
+/*_____________Desktop_________*/
 
-/* PC */
 @media (min-width : 1101px) {
-  .sidebar_pc_fix {
-    position: fixed;
-    top: 210px;
-    height: auto;
-  }
-
-  #single_formation_content {
-    width: 100%;
-    margin: 0 0 0 5%;
-  }
 
   #single_formation_sidebar_left {
-    width: 30%;
+    width: 25%;
     height: auto;
-    font-size: 80%;
-    margin-bottom: 350px;
-    margin-left: -2%;
   }
 
   .single_formation_thumbnail {
@@ -411,10 +391,9 @@
   }
 
   #single_formation_h1 h1 {
-    width: 90%;
-    font-size: 120%;
+    width: 85%;
+    font-size: 140%;
     margin: 5% auto 0;
-    text-align: center;
   }
 
   #slidebar_element {
@@ -424,34 +403,24 @@
 
   #single_formation_tarif,
   #single_formation_duree {
-    width: 100%;
-    height: auto;
-    margin-bottom: auto;
+    width: 80%;
     margin-top: 3%;
     margin-left: 5%;
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   #single_formation_tarif img,
   #single_formation_duree img {
-    width: 31%;
-    height: 20%;
+    width: 30%;
     margin-top: 10%;
   }
 
   #single_formation_tarif p,
   #single_formation_duree p {
     font-size: 130%;
-    font-weight: 650;
-    text-align: center;
     margin-top: 20%;
-  }
-
-  #single_formation_tarif p {
-    width: 50%;
-  }
-
-  #single_formation_duree p {
     width: 50%;
   }
 
@@ -462,15 +431,28 @@
 
   #single_formation_bloc_contact p {
     text-align: center;
+    font-size: 120%;
   }
 
-  .single_formation_content {
-    width: 100%;
+  #single_formation_bloc_contact button {
+    font-size: 115%;
   }
 
-  .single_formation_content_after_fix {
+  #single_formation_bloc_contact button:hoover {
+    font-size: 135%;
+  }
+
+
+  #single_formation_content {
     width: 80% !important;
-    margin: 0 0 0 25% !important;
+    margin: 0px 2% 0 3%;
+  }
+
+
+  .single_formation_block_title h2,
+  .single_formation_block_title_formation h2,
+  .single_formation_carte_title {
+    font-size: 160%;
   }
 
   .single_formation_icone,
@@ -478,6 +460,13 @@
     width: 10%;
     height: 10%;
   }
+
+  .single_formation_icone3 {
+    width: 12%;
+    height: 12%;
+    margin-right: 5%;
+  }
+
 
   #single_formation_link_formation {
     font-size: 90%;
@@ -488,561 +477,32 @@
     width: 30%;
   }
 }
-@media (min-width : 1101px) and (max-width : 1270px){
-  .sidebar_pc_fix {
-    width: 22% !important;
-  }
-}
 
-@media (min-width : 1271px) and (max-width : 1464px){
-  .sidebar_pc_fix {
-    width: 19% !important;
-  }
-}
-
-@media (min-width : 1465px) and (max-width : 1650px){
-  .sidebar_pc_fix {
-    width: 17.5% !important;
-  }
-}
-
-@media (min-width : 1651px){
-  .sidebar_pc_fix {
-    width: 13.5% !important;
-  }
-}
-
-
-/* slidebar au dessus de 1270 et en dessous de 1464px
-  .sidebar_pc_fix {
+@media (min-width : 1101px) and (max-width:1650px) {
+  .sidebar_pc {
     position: fixed;
-    top: 150px;
-    width: 18% !important;
+    top: 156px;
+    width: 20% !important;
+    height: auto !important;
   }
 
-  au desus de 1465px 
-  .sidebar_pc_fix {
+  .single_formation_content_after_fix {
+    width: 80% !important;
+    margin: 0 2% 0 25% !important;
+  }
+}
+
+@media (min-width : 1651px) {
+  .sidebar_pc {
     position: fixed;
-    top: 150px;
-    width: 15% !important;
-  }
-  */
-
-
-
-
-
-/*DANS ANCIEN CSS GENERAL*/
-/* 
-  #single_formation_sidebar_left {
-    width: 15%;
-    height: auto;
-    background-color: #ffc61c;
-    position: fixed;
-    top: 260px;
-  } */
-
-/*   .single_formation_icone {
-    width: 7%;
-    height: auto;
-  }
-
-  .single_formation_icone2 {
-    width: 8%;
-    height: auto;
-  } */
-
-/*   .single_formation_icone,
-  .single_formation_icone2 {
-    width: 10%;
-    height: auto;
-  } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*   body {
-    background-color: #fff4ea;
-    margin: 0;
-    padding: 0;
-  } */
-/*   #single_formation_main {
-    margin: 0% 0%;
-  } */
-
-
-
-
-
-
-
-/*   .slidebar_mobile_fix #single_formation_h1 h1 {
-    font-size: 120%;
-  }
-
-  .slidebar_mobile_fix #single_formation_tarif,
-  .slidebar_mobile_fix #single_formation_duree {
-    width: 20%;
+    top: 156px;
+    width: 13% !important;
     font-size: 80%;
   }
 
-  .slidebar_mobile_fix #single_formation_bloc_contact {
-    font-size: 80%;
-    width: 45%;
-  } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-  
-  @media (min-width: 940px)and (max-width: 1900px) {
-    .single_formation_sidebar_left {
-      width: 18%;
-      height: 30px;
-      text-align: center;
-      background-color: #ffc61c;
-      position: fixed;
-      top: 30%;
-    }
+  .single_formation_content_after_fix {
+    width: 80% !important;
+    margin: 0 2% 0 17% !important;
+    font-size: 85%;
   }
-  
-  @media (min-width : 768px) and(max-width : 1023px) {    
-    
-    .single_formation_sidebar_left {
-      width: 20%;
-      height: auto;
-      text-align: center;
-      background-color: #ffc61c;
-      position: fixed;
-      top: 210;
-    }
-  }
-  
-  @media (min-width: 628px) and (max-width : 767px) {
-    body {
-      background-color: #fff4ea;
-    }
-  
-    #single_formation_titre {
-      text-align: center;
-      margin-top: 30%;
-      margin-bottom: 3%;
-    }
-  
-    #single_formation_main {
-      margin: 0% 5% !important;
-    }
-  
-    .single_formation_sidebar_left {
-      width: 100%;
-      height: auto;
-      text-align: center;
-      background-color: #ffc61c;
-      display: flex;
-      justify-content: space-between;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: none !important;
-    }
-  
-    .single_formation_sidebar_left p {
-      font-size: 80%;
-    }
-  
-    #single_formation_bloc_contact {
-      width: 25%;
-      padding: 1% 0;
-    }
-  
-    #single_formation_bloc_contact p {
-      font-size: 65%;
-    }
-  
-    .single_formation_thumbnail {
-      width: 40%;
-      height: 40%;
-      margin: 1%;
-      display: flex;
-    }
-  
-    .single_formation_thumbnail img {
-      width: 100%;
-      height: auto;
-      margin: 2%;
-    }
-  
-    #single_formation_tarif {
-      display: none;
-    }
-  
-    #single_formation_tarif img {
-      margin-right: 25px;
-      display: none;
-    }
-  
-    #single_formation_tarif p {
-      font-size: 100%;
-      width: 10%;
-      position: fixed;
-      top: 140;
-      left: 230;
-      display: none;
-    }
-  
-    #single_formation_duree {
-
-      display: none;
-    }
-  
-    #single_formation_duree img {
-      display: none;
-      width: 20%;
-      margin-left: 25px
-    }
-  
-    #single_formation_duree p {
-      width: 10%;
-      position: fixed;
-      top: 140;
-      left: 520;
-      display: none;
-    }
-  
-    .single_formation_content {
-      width: 100% !important;
-      margin-left: 0;
-    }
-  
-    .single_formation_block {
-      width: 100%;
-    }
-  
-    .single_formation_block_title {
-      margin-bottom: 2%;
-    }
-  
-    .single_formation_icone {
-      width: 20%;
-    }
-  
-    .single_formation_icone2 {
-      width: 10%;
-    }
-  
-    .single_formation_icone3 {
-      width: 6%;
-      height: auto;
-    }
-
-  }
-  
-  @media (max-width : 627px) {  
-    body {
-      background-color: #fff4ea;
-    }
-  
-    #single_formation_titre {
-      text-align: center;
-      margin-top: 30%;
-      margin-bottom: 3%;
-    }
-  
-/*     #single_formation_main {
-      margin: 0% 5%;
-    } */
-
-/*-----------------------------------Slide bar a revoir ---------------------------*/
-/*
-    .single_formation_sidebar_left {
-      width: 100%;
-      height: auto;
-      background-color: #1c64ff;
-      position: fixed;
-      left: 0;
-      top: 245;*/
-/*     text-align: center;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      position: fixed;
-      top: 5;
-      left: 0;
-      display: none; */
-/*}
-
-/*
-    .single_formation_sidebar_left p {
-      font-size: 80%;
-    }
-  
-    #single_formation_bloc_contact {
-      width: 25%;
-      padding: 1% 0;
-    }
-  
-    #single_formation_bloc_contact p {
-      font-size: 65%;
-    }
-  
-    .single_formation_thumbnail {
-      width: 40%;
-      height: 40%;
-      margin: 1%;
-      display: flex;
-    }*/
-
-/*   .single_formation_thumbnail img {
-      width: 100%;
-      height: auto;
-      margin: 2%;
-    } */
-/*
-
-  
-    #single_formation_tarif img {
-      margin-right: 25px;
-      width: 50%;
-    }
-  
-    #single_formation_tarif p {
-      font-size: 100%;
-      width: 10%;
-    }
-
-  
-    #single_formation_duree img {
-      width: 20%;
-      margin-left: 25px
-    }
-  
-    #single_formation_duree p {
-      width: 10%;
-      position: fixed;
-      top: 140;
-      left: 520;
-      display: none;
-    }*/
-
-/*-----------------------------------Slide bar a revoir ---------------------------*/
-/* .single_formation_content {
-      width: 100%;
-      margin-left: 0;
-    }
-  
-  
-    .single_formation_icone {
-      width: 25%;
-    }
-  }*/
-
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+}
