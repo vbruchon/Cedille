@@ -1,0 +1,173 @@
+@media screen {
+    main {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+
+    .carte {
+        background-color: #FFFF;
+        margin-left: 4%;
+        margin-bottom: 5%;
+        padding: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform .4s;
+    }
+
+    .carte:hover {
+        transform:scale(1.08);
+    }
+
+    #archive_formation_title {
+        text-align: center;
+        font-size: 150%;
+        margin-top: 5%;
+    }
+
+    #filterbar {
+        margin: 3% auto;
+    }
+
+    #filterbar h3 {
+        font-size: 100%;
+        text-align: center;
+    }
+
+    #formFilter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #formFilter select {
+        width: 90%;
+        margin: 3%;
+        background-color: #fff4ea;
+        border: 2px solid #37827a;
+        text-align: center;
+        color: #37827a;
+        font-weight: bolder;
+    }
+
+    #formFilter option:hover {
+        background-color: #5ccbc3;
+    }
+
+    #formFilter input {
+        width: 35%;
+        font-size: 120%;
+    }
+
+    #carte_Formation {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .carte_img {
+        margin-bottom: 5%;
+        display: flex;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        border-radius: 30px 30px 0px 0px;
+    }
+
+    .carte_img img {
+        border-radius: 30px 30px 0px 0px;
+    }
+
+    .carte_title {
+        text-align: center;
+        font-weight: 600 !important;
+        font-size: 120% !important;
+        margin: 2% auto 0 auto;
+    }
+
+    .link_formation {
+        display: block;
+        margin: 6% auto 3% auto;
+        font-size: 100%;
+    }
+
+    .link_formation:hover {
+        font-size: 120%;
+    }
+
+    .category {
+        display: flex;
+        justify-content: center;
+    }
+
+    .name_category {
+        margin-top: 7%;
+    }
+
+    .icone_category {
+        width: 20%;
+        height: auto;
+        margin-right: 7%;
+        margin-bottom: 2%;
+    }
+
+    #thema, #forma {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+    }
+
+    #thema label,
+    #forma label {
+        margin-bottom: 2%;
+    }
+
+}
+
+@media (max-width : 450px) {
+    .link_formation {
+        font-size: 90% !important;
+    }
+
+    .link_formation:hover {
+        font-size: 105% !important;
+    }
+
+}
+
+@media (max-width : 767px) {
+    .carte {
+        width: 85%;
+    }
+    #thema, #forma {
+        width: 100%;
+    }
+
+    #thema label,
+    #forma label {
+        text-align: center;
+    }
+
+}
+
+@media (min-width : 768px) and (max-width : 1100px) {
+    .carte {
+        width: 40%;
+    }
+}
+
+@media (min-width : 1101px) {
+    .carte {
+        width: 28%;
+    }
+
+
+    #formFilter select {
+        margin: 0 3% 0 0;
+    }
+
+    #formFilter input {
+        width: 20%;
+        font-size: 120%;
+    }
+}
