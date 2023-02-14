@@ -374,7 +374,7 @@ function wpm_custom_post_type()
 		'hierarchical'        => false,
 		'public'              => true,
 		'has_archive'         => true,
-		'rewrite'	      => array('slug' => 'tiers-lieux'),
+		'rewrite'	      => array('slug' => 'contact'),
 	);
 	register_post_type('contact', $args);
 
@@ -396,6 +396,21 @@ function wpm_custom_post_type()
 		'hierarchical' => true,
 	);
 	register_taxonomy('thematique', 'formations', $args);
+
+
+	$labels = array(
+		'name' => 'Formats',
+		'new_item_name' => 'Nouveau format',
+		'parent_item' => 'Format parents',
+	);
+
+	$args = array(
+		'labels' => $labels,
+		'public' => true,
+		'show_in_rest' => true,
+		'hierarchical' => true,
+	);
+	register_taxonomy('format', 'formations', $args);
 
 	/*_____AVIS_____*/
 
@@ -460,12 +475,12 @@ function my_theme_enqueue_styles()
 	wp_enqueue_script('caroussel-advices-js', get_template_directory_uri() . '/assets/js/caroussel-advices-js.js', array(), '1.0.0');
 
 	//My custom CSS
+	wp_register_style('archive-css', get_template_directory_uri() . '/assets/css/archive.css', '1.0.0');
+	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
 	wp_register_style('carousel-css', get_template_directory_uri() . '/assets/css/carousel.css', '1.0.0');
+	wp_register_style('carouselAdvices-css', get_template_directory_uri() . '/assets/css/carouselAdvices-css.css', '1.0.0');
 	wp_register_style('all-thematique-css', get_template_directory_uri() . '/assets/css/all-thematique.css', '1.0.0');
 	wp_register_style('contact-css', get_template_directory_uri() . '/assets/css/contact-css.css', '1.0.0');
-	wp_register_style('archive-formations-css', get_template_directory_uri() . '/assets/css/archive-formations.css', '1.0.0');
-	wp_register_style('single-formations-css', get_template_directory_uri() . '/assets/css/single-formations.css', '1.0.0');
-	wp_register_style('carouselAdvices-css', get_template_directory_uri() . '/assets/css/carouselAdvices-css.css', '1.0.0');
 
 	// Enqueue all CSS & JS files
 	wp_enqueue_script('jquery-min-js');
@@ -476,7 +491,7 @@ function my_theme_enqueue_styles()
 	wp_enqueue_style('carouselAdvices-css');
 	wp_enqueue_style('all-thematique-css');
 	wp_enqueue_style('contact-css');
-	wp_enqueue_style('archive-formations-css');
+	wp_enqueue_style('archive-css');
 	wp_enqueue_style('single-formations-css');
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -564,20 +579,82 @@ add_shortcode('advices', 'shortcode_Advices');
 
 function shortcode_contact_element()
 {
-?>
-	<link rel="stylesheet" href="contact.css">
-	<?
-
 	$params = array('post_type' => 'contact');
-	$contact = new WP_Query($params); ?>
-	<div id="contact">
+	$contact = new WP_Query($params);
+
+	$fieldPhone = get_field('contact-phone');
+	$fieldEmail = get_field('contact-email');
+
+?>
+	<!-- 	<div id="contact">
 		<div id="phone">
-			<a href="tel:<? echo the_field("contact-phone") ?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt=""></a>
+			<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt="">
+			<div id="phone_number"></div>
 		</div>
 		<div id="email">
-			<a href="mailto:<? echo the_field("contact-email") ?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt=""></a>
+			<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt="">
+			<div id="email_adress"></div>
+		</div>
+	</div> -->
+	<p><? echo $fieldEmail; ?></p>
+	<div id="contact">
+		<div id="phone">
+			<div class="picto-contact">
+				<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt="">
+			</div>
+			<div id="phone_number">
+				<a href="tel:<? echo $fieldPhone ?>"> 0607965374 </a>
+			</div>
+		</div>
+		<div id="email">
+			<div class="picto-contact">
+				<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt="">
+			</div>
+			<div id="email_adress">
+				<a href="mailto:<? the_field('contact-email') ?>">sescandell@lemoulindigital.fr </a>
+			</div>
 		</div>
 	</div>
+
+	<script>
+		let phonePicto = document.querySelector("#phone .picto-contact")
+		let phoneNumber = document.getElementById("phone_number")
+		let emailPicto = document.querySelector("#email .picto-contact")
+		let emailNumber = document.getElementById("email_adress")
+
+		phonePicto.addEventListener("click", () => {
+			if (phoneNumber.style.display === "flex") {
+				phoneNumber.style.display = "none";
+			} else {
+				phoneNumber.style.display = "flex";
+			}
+		})
+
+		emailPicto.addEventListener("click", () => {
+			if (emailNumber.style.display === "flex") {
+				emailNumber.style.display = "none";
+			} else {
+				emailNumber.style.display = "flex";
+			}
+		})
+	</script>
+
+
+	<!-- 	<link rel="stylesheet" href="contact.css">
+	<?
+
+	/* $params = array('post_type' => 'contact');
+	$contact = new WP_Query($params); */ ?>
+	<div id="contact">
+		<div id="phone">
+			<a href="tel:<? //echo the_field("contact-phone") 
+							?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt=""></a>
+		</div>
+		<div id="email">
+			<a href="mailto:<? //echo the_field("contact-email") 
+							?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt=""></a>
+		</div>
+	</div> -->
 <?
 }
 add_shortcode('contact_element', 'shortcode_contact_element');
