@@ -1,7 +1,3 @@
-/*
-* Style CSS for single-formation.php
-*/
-
 @media screen {
   body {
     background-color: #fff4ea;
@@ -11,13 +7,32 @@
 
   #single_formation_main {
     display: flex;
-    margin: 5% 10% 10% 10%;
+    margin: 5% 10% 0% 10%;
     height: auto;
+    flex-wrap: wrap;
+  }
+
+  #filArianne {
+    display: flex;
+    width: 30%;
+    margin-left: 6%;
+  }
+
+  #filArianne .all {
+    margin-right: 4%;
+  }
+
+  #filArianne .thematique {
+    margin-left: 4%;
+  }
+
+  #filArianne p {
+    color: #ff0080;
   }
 
   #single_formation_sidebar_left {
     height: auto;
-    background-color: #ffc61c;
+    position: sticky;
   }
 
   #single_formation_h1 h1 {
@@ -87,11 +102,22 @@
     align-items: center;
   }
 
+  .single_formation_block h3 {
+    margin-left: 2%;
+  }
+
+  .single_formation_block p {
+    margin-left: 4%;
+  }
+
   #single_formation_carte_Formation {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    cursor: pointer;
   }
+
+
 
   .single_formation_carte {
     background-color: #FFFF;
@@ -101,6 +127,11 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
     border-radius: 30px;
     text-align: center;
+    transition: transform .4s;
+  }
+
+  #single_formation_carte:hover {
+    transform: scale(1.08);
   }
 
   .single_formation_carte_img img {
@@ -121,50 +152,17 @@
     margin-top: 3%;
     font-size: 150%;
   }
-
-
 }
 
-/*______________MOBILE__________*/
-@media (max-width : 500px) {
-  #single_formation_tarif img {
-    margin-top: 30% !important;
-    margin-left: 5% !important;
-  }
-
-  .single_formation_icone {
-    width: 20% !important;
-    height: 17% !important;
-  }
-
-  #single_formation_tarif img,
-  #single_formation_duree img {
-    width: 65% !important;
-  }
-
-  #single_formation_duree img {
-    margin-left: 8% !important;
-  }
-
-  #single_formation_bloc_contact button {
-    font-size: 110%;
-  }
-
-}
-
-@media (max-width : 767px) {
-  header {
-    display: none;
-  }
-
+@media (max-width: 767px) {
   #single_formation_main {
-    margin: 0 !important;
+    margin: 0 3% !important;
   }
 
-  .sidebar_mobile {
-    width: 100%;
-    position: fixed;
-    top: 0;
+  #single_formation_sidebar_left {
+    position: sticky;
+    top: 0px;
+    background-color: #FFF4EA;
   }
 
   .single_formation_thumbnail {
@@ -174,6 +172,7 @@
   #single_formation_h1 h1 {
     font-size: 120%;
     margin-top: 3%;
+    width: 98%;
   }
 
   #single_formation_tarif,
@@ -192,40 +191,28 @@
 
   #single_formation_tarif img,
   #single_formation_duree img {
-    width: 45%;
-    height: auto;
-    margin-left: 20%;
+    width: 50%;
+    margin-left: 6%;
   }
 
   #single_formation_tarif p {
-    font-size: 120%;
-    margin-left: 15%;
-    width: 60%;
+    font-size: 130%;
+    width: 70%;
   }
 
   #single_formation_duree p {
     font-size: 120%;
-    margin-top: 7%;
-    width: 75%;
-  }
-
-  .single_formation_icone,
-  .single_formation_icone2 {
-    width: 10%;
-    height: 17%;
-  }
-
-  .single_formation_icone3 {
-    width: 17% !important;
-    height: 17% !important;
-    margin-right: 5%;
+    width: 65%;
   }
 
   #single_formation_bloc_contact {
     margin-top: 0;
     margin-bottom: 4px;
-    font-size: 80%;
-    width: 45%;
+    font-size: 95%;
+    width: 50%;
+    font-weight: 600;
+    border: solid 2px #FFC61A;
+    border-radius: 10px;
   }
 
   #single_formation_content {
@@ -234,12 +221,10 @@
     margin: 5% auto;
   }
 
-  #single_formation_titre {
-    margin-top: 40%;
-  }
-
-  .single_formation_block_title h2 {
-    font-size: 190%;
+  .single_formation_icone,
+  .single_formation_icone2,
+  .single_formation_icone3 {
+    width: 12%;
   }
 
   .single_formation_block p {
@@ -250,48 +235,46 @@
     font-size: 150%;
   }
 
-
-
-
-
-
-
   .single_formation_carte {
-    width: 60%;
+    width: 100%;
+    transition: transform .4s;
   }
 
+  #single_formation_carte:hover {
+    transform: scale(1.08);
+  }
 
+  .single_formation_carte_title {
+    font-size: 120%;
+  }
+
+  #single_formation_link_formation {
+    font-size: 90%;
+  }
 }
 
-/*_____________TABLETT_________*/
-
-@media (min-width : 768px) and (max-width : 1100px) {
+@media (min-width: 768px) and (max-width: 1100px) {
   #single_formation_main {
     margin: 0;
   }
 
   #single_formation_sidebar_left {
-    width: 40%;
-    font-size: 75%;
-    height: auto;
-  }
-
-  .sidebar_tablett {
-    width: 23.5% !important;
-    height: auto !important;
-    position: fixed;
-    top: 170px;
-    left: 5%;
+    width: 27%;
+    border: solid 5px #ffc61a;
+    border-radius: 20px;
+    max-height: 850px;
+    top: 180px;
+    margin-bottom: 2%;
+    height: 100%;
   }
 
   .single_formation_thumbnail {
-    width: 80%;
+    width: 65%;
   }
 
   #single_formation_h1 h1 {
-    width: 90%;
-    font-size: 150%;
-    margin: 5% auto 0;
+    font-size: 125%;
+    margin: 5% auto 7%;
   }
 
   #slidebar_element {
@@ -299,60 +282,62 @@
   }
 
   #single_formation_tarif,
-  #single_formation_duree {
+  #single_formation_duree,
+  #satisfaction {
     width: 100%;
-    height: auto;
-    margin-bottom: auto;
     margin-left: 5%;
     display: flex;
     align-items: center;
+    margin-bottom: 3%;
   }
 
   #single_formation_tarif img,
-  #single_formation_duree img {
-    width: 30%;
-    height: 10%;
-    margin-top: 15%;
+  #single_formation_duree img,
+  #satisfaction img {
+    width: 20%;
   }
 
   #single_formation_tarif p {
-    font-size: 135%;
+    font-size: 120%;
     width: 60%;
-    margin-top: 15%;
+    margin-top: 7%;
   }
 
   #single_formation_duree p {
-    font-size: 135%;
-    margin-top: 15%;
-    width: 48%;
+    font-size: 120%;
+    margin-top: 7%;
+    width: 47%;
   }
 
-  #single_formation_tarif img,
-  #single_formation_duree img {
-    margin-right: 13px;
+  #satisfaction p {
+    font-size: 110%;
+    margin-top: 12%;
+    margin-left: 12%;
+    font-weight: 700;
+  }
+
+
+  #satisfaction .single_formation_icone {
+    width: 30% !important;
   }
 
   #single_formation_bloc_contact {
     width: 90%;
-    margin: 10% 10% 5% auto;
-    font-size: 130%;
-    display: block;
+  }
+
+  #single_formation_bloc_contact p {
+    font-size: 110%;
   }
 
   button,
   #single_formation_link_formation {
-    font-size: 85%;
+    font-size: 95%;
   }
 
   #single_formation_content {
-    width: 100%;
-    margin: 0 2% 0 5%;
+    width: 70%;
     display: block;
-  }
-
-  .single_formation_content_after_fix {
-    width: 80% !important;
-    margin: 0 2% 0 30% !important;
+    margin-left: 3%;
   }
 
   .single_formation_block_title h2,
@@ -374,135 +359,163 @@
 
   .single_formation_carte {
     width: 45%;
+    transition: transform .4s;
+  }
+
+  #single_formation_carte:hover {
+    transform: scale(1.08);
   }
 }
 
-/*_____________Desktop_________*/
-
-@media (min-width : 1101px) {
-
-  #single_formation_sidebar_left {
-    width: 25%;
-    height: auto;
+@media (min-width: 1101px) {
+  #single_formation_main {
+    margin: 0;
   }
 
   .single_formation_thumbnail {
-    width: 75%;
+    width: 65%;
   }
 
   #single_formation_h1 h1 {
-    width: 85%;
-    font-size: 140%;
-    margin: 5% auto 0;
+    font-size: 120%;
+    margin: 5% auto 7%;
   }
 
   #slidebar_element {
-    display: flex;
     flex-direction: column;
   }
 
   #single_formation_tarif,
-  #single_formation_duree {
-    width: 80%;
-    margin-top: 3%;
+  #single_formation_duree,
+  #satisfaction {
+    width: 100%;
     margin-left: 5%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin-bottom: 3%;
   }
 
   #single_formation_tarif img,
   #single_formation_duree img {
-    width: 30%;
-    margin-top: 10%;
+    width: 19%;
   }
 
-  #single_formation_tarif p,
+  #single_formation_tarif p {
+    font-size: 125%;
+    width: 65%;
+    margin-top: 7%;
+  }
+
   #single_formation_duree p {
-    font-size: 130%;
-    margin-top: 20%;
-    width: 50%;
+    font-size: 125%;
+    margin-top: 7%;
+    width: 47%;
+  }
+
+  #satisfaction p {
+    font-size: 120%;
+    margin-top: 12%;
+    margin-left: 12%;
+    font-weight: 700;
+    width: 60%;
+  }
+
+
+  #satisfaction .single_formation_icone {
+    width: 20% !important;
   }
 
   #single_formation_bloc_contact {
     width: 90%;
-    margin: 5% auto 3%;
+    margin: 2% auto;
   }
 
   #single_formation_bloc_contact p {
-    text-align: center;
-    font-size: 120%;
+    font-size: 105%;
   }
 
-  #single_formation_bloc_contact button {
-    font-size: 115%;
+  button,
+  #single_formation_link_formation {
+    font-size: 110%;
   }
-
-  #single_formation_bloc_contact button:hoover {
-    font-size: 135%;
-  }
-
 
   #single_formation_content {
-    width: 80% !important;
-    margin: 0px 2% 0 3%;
+    width: 70%;
+    display: block;
+    margin-left: 3%;
   }
-
 
   .single_formation_block_title h2,
   .single_formation_block_title_formation h2,
   .single_formation_carte_title {
-    font-size: 160%;
+    font-size: 180%;
+  }
+
+  .single_formation_block p,
+  .single_formation_block ul,
+  .single_formation_block ol {
+    font-size: 125%;
   }
 
   .single_formation_icone,
-  .single_formation_icone2 {
-    width: 10%;
-    height: 10%;
-  }
-
+  .single_formation_icone2,
   .single_formation_icone3 {
-    width: 12%;
-    height: 12%;
-    margin-right: 5%;
-  }
-
-
-  #single_formation_link_formation {
-    font-size: 90%;
-    text-align: center;
+    width: 7%;
   }
 
   .single_formation_carte {
-    width: 30%;
+    width: 45%;
+    transition: transform .4s;
+  }
+
+  #single_formation_carte:hover {
+    transform: scale(1.08);
   }
 }
 
-@media (min-width : 1101px) and (max-width:1650px) {
-  .sidebar_pc {
-    position: fixed;
-    top: 156px;
-    width: 20% !important;
-    height: auto !important;
+@media (min-width: 1101px) and (max-width: 1204px) {
+  #single_formation_sidebar_left {
+    width: 25%;
+    border: solid 5px #ffc61a;
+    border-radius: 20px;
+    max-height: 100%;
+    top: 200px;
+    margin-bottom: 2%;
+    height: 100%;
   }
 
-  .single_formation_content_after_fix {
-    width: 80% !important;
-    margin: 0 2% 0 25% !important;
+  .single_formation_carte_title {
+    font-size: 145%;
+  }
+
+}
+
+@media (min-width: 1205px) {
+  #single_formation_sidebar_left {
+    width: 19%;
+    border: solid 5px #ffc61a;
+    border-radius: 20px;
+    max-height: 100%;
+    top: 195px;
+    margin-bottom: 2%;
+    height: 100%;
   }
 }
 
-@media (min-width : 1651px) {
-  .sidebar_pc {
-    position: fixed;
-    top: 156px;
-    width: 13% !important;
-    font-size: 80%;
+
+@media (min-width: 1500px) {
+
+  .single_formation_icone,
+  .single_formation_icone2,
+  .single_formation_icone3 {
+    width: 6%;
   }
 
-  .single_formation_content_after_fix {
-    width: 80% !important;
-    margin: 0 2% 0 17% !important;
-    font-size: 85%;
+
+}
+
+@media (min-width: 1700px) {
+  #single_formation_sidebar_left {
+    top: 185px !important;
   }
 }

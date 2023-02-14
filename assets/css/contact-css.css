@@ -1,40 +1,102 @@
-#contact{
-    position: fixed;
-    right: 10px;
-    top: 210px;
-}
-
-#phone, #email{
-    background-color: #FF0080;
-    margin-bottom: 10px;
-    width: 60px;
-    height: 60px;
-    padding: 10%;
-    border-radius: 15%;
-}
-
-#phone img, #email img{
-    width: 100%;
-    height: 100%;
-}
-
-@media screen and (max-width: 767px) {
-    #contact{
-        top: 310px !important;
-        right: 5px;
+@media screen {
+    #contact {
+        position: fixed;
+        right: 15px;
+        top: 235px;
+        z-index: 100;
+        width: 22%;
     }
-    #phone, #email{
-        width: 40px;
-        height: 40px;
+
+    #phone,
+    #email {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .picto-contact {
+        width: 75px;
+        height: 75px;
+        background-color: #ff0080;
+        background-size: cover;
+        background-position: center center;
+        transition: transform .4s;
+        margin: 0 0 1% 0;
+        padding: 3%;
+        border-radius: 15%;
+        transition: transform .4s;
+    }
+
+    #phone .picto-contact img,
+    #email .picto-contact img {
+        border-radius: 15%;
+        width: 150% !important;
+    }
+
+    .picto-contact:hover {
+        cursor: pointer;
+        transform: scale(1.32);
+        border-radius: 15%;
+    }
+
+    #phone_number,
+    #email_adress {
+        background-color: #ff0080;
+        width: 65%;
+        height: 55px;
+        width: auto;
+        align-items: center;
+        display: none;
+        border-radius: 0 30px 30px 0;
+    }
+
+    #phone_number {
+        width: 40%;
+    }
+
+    #email_adress {
+        width: 80%;
+    }
+
+    #phone_number a,
+    #email_adress a {
+        font-size: 150%;
+        color: #fff4ea !important;
+        font-weight: bold !important;
+        transition: transform .4s;
+    }
+
+    #phone_number a {
+        margin: 0 10%;
+    }
+
+    #email_adress a {
+        margin: 0 5%;
+    }
+
+    @media (max-width: 767px) {
+        #contact {
+            top: 250px;
+            right: 5px;
+        }
+
+        .picto-contact {
+            width: 55px;
+            height: 55px;
+        }
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1100px){
-    #contact{
-        top: 180px !important;
+@media (min-width: 768px) and (max-width: 1100px) {
+    #contact {
+        top: 210px;
+        width: 45%;
     }
-    #phone, #email{
-        width: 50px;
-        height: 50px;
+
+    .picto-contact {
+        width: 65px;
+        height: 65px;
+        padding: 2%;
     }
 }

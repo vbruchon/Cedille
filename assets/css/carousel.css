@@ -4,11 +4,13 @@
 
 .caroussel {
     position: relative;
-    height: 300px;
+    height: 330px;
     overflow: hidden;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
-.caroussel_item {
+#container .caroussel_item {
     float: left;
     display: flex;
     justify-content: center;
@@ -17,7 +19,7 @@
 #container .element {
     width: 250px;
     height: auto;
-    transition: transform .1s;
+    transition: transform .4s;
 }
 
 #container .element img {
@@ -26,7 +28,7 @@
 }
 
 #container .element:hover {
-    width: 350px !important;
+    transform:scale(1.08);
 }
 
 .caroussel_next,
@@ -36,7 +38,6 @@
     height: 40px;
     border-radius: 50%;
     top: 45%;
-    box-shadow: 0 15px 35px #3232321a, 0 5px 15px #0000001a;
     cursor: pointer;
 }
 
