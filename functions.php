@@ -497,7 +497,9 @@ function my_theme_enqueue_styles()
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
 function shortcode_carousel_TL()
-{ ?>
+{
+	ob_start();
+?>
 	<div id="container">
 		<?
 		$params = array('post_type' => 'tiers-lieux', 'orderby' => 'post_date', 'order' => 'ASC');
@@ -513,6 +515,8 @@ function shortcode_carousel_TL()
 	</div>
 	<script src="./assets/js/carousel-js.js"></script>
 	<?
+	$content = ob_get_clean();
+	echo $content;
 }
 add_shortcode('tiers-lieux_caroussel', 'shortcode_carousel_TL');
 
@@ -586,36 +590,28 @@ function shortcode_contact_element()
 	$fieldEmail = get_field('contact-email');
 
 ?>
-	<!-- 	<div id="contact">
-		<div id="phone">
-			<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt="">
-			<div id="phone_number"></div>
-		</div>
-		<div id="email">
-			<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt="">
-			<div id="email_adress"></div>
-		</div>
-	</div> -->
-	<p><? echo $fieldEmail; ?></p>
-	<div id="contact">
-		<div id="phone">
-			<div class="picto-contact">
-				<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt="">
+	<? if (!$contact->have_posts())
+		return false;
+	else while ($contact->have_posts()) : $contact->the_post(); ?>
+		<div id="contact">
+			<div id="phone">
+				<div class="picto-contact">
+					<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt="">
+				</div>
+				<div id="phone_number">
+					<a href="tel:<? the_field('contact-phone') ?>"> <? echo the_field('contact-phone') ?> </a>
+				</div>
 			</div>
-			<div id="phone_number">
-				<a href="tel:<? echo $fieldPhone ?>"> 0607965374 </a>
-			</div>
-		</div>
-		<div id="email">
-			<div class="picto-contact">
-				<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt="">
-			</div>
-			<div id="email_adress">
-				<a href="mailto:<? the_field('contact-email') ?>">sescandell@lemoulindigital.fr </a>
+			<div id="email">
+				<div class="picto-contact">
+					<img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt="">
+				</div>
+				<div id="email_adress">
+					<a href="mailto:<? the_field('contact-email') ?>"> <? echo the_field('contact-email') ?> </a>
+				</div>
 			</div>
 		</div>
-	</div>
-
+	<? endwhile; ?>
 	<script>
 		let phonePicto = document.querySelector("#phone .picto-contact")
 		let phoneNumber = document.getElementById("phone_number")
@@ -637,24 +633,17 @@ function shortcode_contact_element()
 				emailNumber.style.display = "flex";
 			}
 		})
+		
+
+/* 
+Event listener sur la taille de la fenêtre, 
+Si mobile, 
+la picto prend le href:mailto et href:tel
+Sinon le href est dans la div caché.
+*/
+
+
 	</script>
-
-
-	<!-- 	<link rel="stylesheet" href="contact.css">
-	<?
-
-	/* $params = array('post_type' => 'contact');
-	$contact = new WP_Query($params); */ ?>
-	<div id="contact">
-		<div id="phone">
-			<a href="tel:<? //echo the_field("contact-phone") 
-							?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/phone.png" alt=""></a>
-		</div>
-		<div id="email">
-			<a href="mailto:<? //echo the_field("contact-email") 
-							?>"><img src="http://cedille-formation.ftalps.fr/wp-content/uploads/2023/01/email.png" alt=""></a>
-		</div>
-	</div> -->
 <?
 }
 add_shortcode('contact_element', 'shortcode_contact_element');
@@ -703,3 +692,51 @@ function shortcode_thematique_home_page()
 <?
 }
 add_shortcode('all-thematique', 'shortcode_thematique_home_page');
+
+function display_latest_post()
+{ ?>
+	<style>
+		.latest-post {
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 20px;
+			border-radius: 15px;
+			box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.75);
+			transition: transform .4s;
+		}
+
+		.latest-post:hover {
+			transform: scale(1.08);
+		}
+
+		.latest-post-content {
+			font-size: 115%;
+			padding: 0 2%;
+		}
+
+		.button-latest-post {
+			display: block;
+			margin: 0 auto;
+			width: 10%;
+			font-size: 110%;
+		}
+	</style>
+	<? $args = array(
+		'post_type' => 'post',
+		'posts_per_page' => 1
+	);
+	$latest_post = new WP_Query($args);
+
+	while ($latest_post->have_posts()) : $latest_post->the_post(); ?>
+		<div class="latest-post">
+			<h2 class="latest-post-title"><? the_title() ?></h2>
+			<div class="latest-post-content">
+				<p><? the_excerpt() ?></p>
+			</div>
+			<button class="button-latest-post" nclick="window.location.href='the_permalink()'"> Lire l'article</a>
+		</div>
+<?
+	endwhile;
+}
+add_shortcode('latest_post', 'display_latest_post');

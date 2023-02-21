@@ -4,7 +4,8 @@
 
 #adviceCaroussel_Stagiaire .caroussel,
 #adviceCaroussel_Formateur .caroussel{
-    height: 360px;
+    max-height: 420px;
+    height: auto;
 }
 
 #adviceCaroussel_Stagiaire .caroussel_item,
