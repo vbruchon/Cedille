@@ -16,7 +16,7 @@
     }
 
     .carte:hover {
-        transform:scale(1.08);
+        transform: scale(1.08);
     }
 
     #archive_formation_title {
@@ -25,19 +25,45 @@
         margin-top: 5%;
     }
 
-    #filterbar {
-        margin: 3% auto;
-    }
 
-    #filterbar h3 {
-        font-size: 100%;
-        text-align: center;
+
+    #filterbar {
+        margin: 3% auto 3% 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
     }
 
     #formFilter {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        width: 60%;
+    }
+
+    #search {
+        width: 30%;
+        margin-top: 1.5%;
+    }
+
+    #thema,
+    #forma {
+        width: 50%;
+    }
+
+    #search form {
+        width: 50%;
+    }
+
+    #thema label,
+    #forma label {
+        margin-bottom: 2%;
+    }
+
+    #filterbar h3 {
+        font-size: 100%;
+        text-align: center;
     }
 
     #formFilter select {
@@ -58,6 +84,11 @@
         width: 35%;
         font-size: 120%;
     }
+
+
+
+
+
 
     #carte_Formation {
         display: flex;
@@ -110,19 +141,24 @@
         margin-right: 7%;
         margin-bottom: 2%;
     }
+}
 
-    #thema, #forma {
-        display: flex;
+
+@media (max-width: 1100px){
+    #filterbar, #formFilter {
         flex-direction: column;
-        width: 45%;
     }
 
-    #thema label,
-    #forma label {
-        margin-bottom: 2%;
+    #formFilter, #thema, #forma, #search {
+        width: 100%;
+    }
+
+    #search form {
+        width: 87%;
     }
 
 }
+
 
 @media (max-width : 450px) {
     .link_formation {
@@ -139,7 +175,9 @@
     .carte {
         width: 85%;
     }
-    #thema, #forma {
+
+    #thema,
+    #forma {
         width: 100%;
     }
 

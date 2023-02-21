@@ -7,6 +7,7 @@
 //ALL thematiques 
 $thematiques = get_terms('thematique', array('hide_empty' => false));
 $formats = get_terms('format', array('hide_empty' => false));
+$valid_formats = array('presentiel', 'distanciel');
 
 $pictoThematique = [
     'bureautique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/ordinateur.png',
@@ -26,6 +27,8 @@ $url = $_SERVER['REQUEST_URI'];
 $segments = explode('thematique', $url);
 $slug = end($segments);
 $slugThematique  = trim($slug, '/');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -50,43 +53,42 @@ $slugThematique  = trim($slug, '/');
             <h1 id="archive_formation_title">Nos Formations</h1>
 
             <!--___FILTERBAR AFFICHAGE (FORM)___-->
-
             <div id="filterbar">
                 <form id="formFilter" method="get">
                     <div id="thema">
                         <label for="thematique">Choisir une thématique : </label>
                         <select name="thematique" id="thematique">
 
-                            <? if ($slugThematique === "formations") : ?>
+                            <? if (($slugThematique === "formations") && (!(isset($_GET['thematique'])))) : ?>
                                 <option value="all" selected>Toutes les formations</option>
                                 <? foreach ($thematiques as $term) : ?>
                                     <option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
                                 <? endforeach; ?>
                             <? else : ?>
-                                <option value="">Toutes les formations</option>
-                                <? foreach ($thematiques as $term) : ?>
-                                    <? if ($slugThematique === $term->slug) : ?>
-                                        <option value="<? echo $term->slug ?>" selected><? echo $term->name ?></option>
-                                    <? else : ?>
-                                        <option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
-                                    <? endif; ?>
-                                <? endforeach; ?>
-                            <? endif; ?>
-
-                            <? if (isset($_GET['thematique'])) : ?>
-                                <option value="all">Toutes les formations</option>
-                                <? foreach ($thematiques as $term) : ?>
-                                    <? if ($_GET['thematique'] === $term->slug) : ?>
-                                        <option value="<? echo $term->slug ?>" selected><? echo $term->name ?></option>
-                                    <? else : ?>
-                                        <option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
-                                    <? endif; ?>
-                                <? endforeach; ?>
+                                <? if (isset($_GET['thematique'])) : ?>
+                                    <option value="all">Toutes les formations</option>
+                                    <? foreach ($thematiques as $term) : ?>
+                                        <? if ($_GET['thematique'] === $term->slug) : ?>
+                                            <option value="<? echo $term->slug ?>" selected><? echo $term->name ?></option>
+                                        <? else : ?>
+                                            <option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
+                                        <? endif; ?>
+                                    <? endforeach; ?>
+                                <? else : ?>
+                                    <option value="all">Toutes les formations</option>
+                                    <? foreach ($thematiques as $term) : ?>
+                                        <? if (($slugThematique === $term->slug) && (!(isset($_GET['thematique'])))) : ?>
+                                            <option value="<? echo $term->slug ?>" selected><? echo $term->name ?></option>
+                                        <? else : ?>
+                                            <option value="<? echo $term->slug ?>"><? echo $term->name ?></option>
+                                        <? endif; ?>
+                                    <? endforeach; ?>
+                                <? endif; ?>
                             <? endif; ?>
                         </select>
                     </div>
                     <div id="forma">
-                        <label for="format">Choisir un format de formations : </label>
+                        <label for="format">Choisir un format : </label>
                         <select name="format" id="format">
                             <? if (isset($_GET['format'])) : ?>
                                 <option value="all">Tous les formats</option>
@@ -105,8 +107,10 @@ $slugThematique  = trim($slug, '/');
                             <? endif; ?>
                         </select>
                     </div>
-                    <input type="submit" value="Filtrer">
                 </form>
+                <div id="search">
+                    <? echo do_shortcode('[ivory-search id="1171" title="Custom Search Form"]'); ?>
+                </div>
             </div>
 
             <?
@@ -119,43 +123,77 @@ $slugThematique  = trim($slug, '/');
             */
 
 
-            if (isset($_GET['thematique']) && isset($_GET['format'])) {
-                if ($_GET['thematique'] !== "all" && ($_GET['format'] !== "all")) {
-                    foreach ($thematiques as $thematique) {
-                        if ($thematique->slug === $_GET['thematique']) {
-                            foreach ($formats as $format) {
-                                if ($format->slug === $_GET['thematique']) {
+            /*
+SI BARRE DE FILTRE UTILISÉ 
+    ET LES 2 != ALL
+        REQUETE POSTYPE THEMATIQUE FORMAT
+    sINON SI THEMATQIUE != ALL ET fORMAT == ALL 
+        REQUETE POSTYPE THEMATIQUE
+    SINON si  THEMATIQUE == ALL ET format!= ALL 
+        REQUETE POSTYPE FORMAT
+SINON SI BARRE DE FILTRE PAS UTILISÉ 
+    REQUETE POSTYPE
+    
+SI BARRE DE RECHERCHE EST UTILISÉ 
+    REQUETE POSTYPE SEARCH PARAMS
+            */
+
+            if (isset($_GET['thematique']) && isset($_GET['format'])) :
+                echo $_GET['format'];
+                if ($_GET['thematique'] !== "all" && ($_GET['format'] !== "all")) : //OK CA PASSE
+                    foreach ($thematiques as $thematique) :
+                        if ($thematique->slug === $_GET['thematique']) :
+                            foreach ($formats as $format) :
+                                if ($format->slug === $_GET['format']) :
                                     $my_posts = new WP_Query(array(
                                         'post_type' => 'formations',
                                         'thematique' => $_GET['thematique'],
-                                        'format' => $_GET['format']
+                                        'format' => $_GET['format'],
                                     ));
-                                }
-                            }
-                        }
-                    }
-                } elseif ($_GET['thematique'] !== "all" && ($_GET['format'] === "all")) {
-                    foreach ($thematiques as $thematique) {
-                        if ($thematique->slug === $_GET['thematique']) {
+                                    break;
+                                endif;
+                            endforeach;
+                        endif;
+                    endforeach;
+                elseif ($_GET['thematique'] !== "all" && ($_GET['format'] === "all")) : //OK CA PASSE
+                    foreach ($thematiques as $thematique) :
+                        if ($thematique->slug === $_GET['thematique']) :
                             $my_posts = new WP_Query(array(
                                 'post_type' => 'formations',
                                 'thematique' => $_GET['thematique']
                             ));
-                        }
-                    }
-                } elseif ($_GET['thematique'] === "all") {
-                    //unset($_GET['thematique']);
+                            break;
+                        endif;
+                    endforeach;
+                elseif (($_GET['thematique'] === "all") && (in_array($_GET['format'], $valid_formats))) :
                     $my_posts = new WP_Query(array(
                         'post_type' => 'formations',
+                        'format' => $_GET['format']
                     ));
-                }
-            } else {
-                if ($slugThematique !== "formations") {
-                    $my_posts = new WP_Query(array('post_type' => 'formations', 'thematique' => $slugThematique));
-                } else {
-                    $my_posts = new WP_Query(array('post_type' => 'formations'));
-                }
-            }
+                else :
+                    $my_posts = new WP_Query(array(
+                        'post_type' => 'formations',
+                        'format' => $_GET['format']
+                    ));
+                endif;
+            elseif (isset($_GET['s']) && $_GET['s'] !== "") :
+                $search_query = $_GET['s'];
+                if (!preg_match("/^[a-zA-Z0-9 ]+$/", $search_query)) :
+                    unset($_GET['s']);
+                    echo "<script>alert(\"Entrée utilisateur non valide. Veuillez saisir uniquement des chiffres, ou des lettres\")</script>";
+                    $my_posts = new WP_Query(array(
+                        'post_type' => 'formations'
+                    ));
+                else :
+                    $search_query = esc_sql($search_query);
+                    $my_posts = new WP_Query(array('post_type' => 'formations', 's' => $search_query));
+                endif;
+            else :
+                $my_posts = new WP_Query(array(
+                    'post_type' => 'formations'
+                ));
+            endif;
+
             ?>
 
             <!--___OUTPUT___-->
@@ -164,13 +202,13 @@ $slugThematique  = trim($slug, '/');
                 if ($my_posts->have_posts()) :
                     while ($my_posts->have_posts()) : $my_posts->the_post(); ?>
                         <div class="carte" onclick="window.location.href ='<? the_permalink() ?>'">
-                                <div class="carte_img" href="'<? the_permalink() ?>'">
-                                    <?php the_post_thumbnail($size_img_couverture); ?>
-                                </div>
-                                <h2 class="carte_title">
-                                    <?php the_title(); ?>
-                                </h2>
-                                <button class="link_formation" onclick="window.location.href ='<? the_permalink() ?>'">Découvrir la formation</button>
+                            <div class="carte_img" href="'<? the_permalink() ?>'">
+                                <?php the_post_thumbnail($size_img_couverture); ?>
+                            </div>
+                            <h2 class="carte_title">
+                                <?php the_title(); ?>
+                            </h2>
+                            <button class="link_formation" onclick="window.location.href ='<? the_permalink() ?>'">Découvrir la formation</button>
                         </div>
                     <?php endwhile; ?>
                 <?php else : ?>
@@ -178,29 +216,76 @@ $slugThematique  = trim($slug, '/');
                 <?php endif; ?>
             </div>
         </div>
-    </main>
+        </div>
 
+
+    </main>
     <footer>
         <?php get_footer(); ?>
     </footer>
-
+    <script>
+        $(document).ready(function() {
+            $('#thematique, #format').on('change', function(e) {
+                e.preventDefault();
+                $('#formFilter').submit();
+            });
+        });
+    </script>
 </body>
 
 </html>
 <?
 /*
-function catchUrl(){
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        $url = "https";
-    } else {
-        $url = "http";
-    }
-    // Ajoutez // à l'URL.
-    $url .= "://";
+if ($_GET['thematique'] === "all" && ($_GET['format'] === "all"))
 
-    // Ajoutez l'hôte (nom de domaine, ip) à l'URL.
-    $url .= $_SERVER['HTTP_HOST'];
 
-    // Ajouter l'emplacement de la ressource demandée à l'URL
-    $url .= $_SERVER['REQUEST_URI'];
-}*/
+
+
+
+
+
+            /* elseif ($_GET['thematique'] !== "all" && ($_GET['format'] === "all")) {
+                    foreach ($thematiques as $thematique) {
+                        if ($thematique->slug === $_GET['thematique']) {
+                            $my_posts = new WP_Query(array(
+                                'post_type' => 'formations',
+                                'thematique' => $_GET['thematique']
+                            ));
+                        }
+                    }
+                } elseif (($_GET['thematique'] === "all") && ($_GET['format'] === "all")) {
+                    $my_posts = new WP_Query(array(
+                        'post_type' => 'formations'
+                    ));
+                }
+            } else {
+                if ($slugThematique !== "formations") {
+                    $my_posts = new WP_Query(array(
+                        'post_type' => 'formations',
+                        'thematique' => $slugThematique
+                    ));
+                } else {
+                    $my_posts = new WP_Query(array('post_type' => 'formations'));
+                }
+            }
+
+
+            if (isset($_GET['format'])) {
+                if ($_GET['format'] !== "all") {
+                    foreach ($formats as $format) {
+                        if ($format->slug === $_GET['format']) {
+                            $my_posts = new WP_Query(array(
+                                'post_type' => 'formations',
+                                'format' => $_GET['format'],
+                            ));
+                        }
+                    }
+                } else {
+                    $my_posts = new WP_Query((array('post_type' => 'formations')));
+                }
+            }
+
+            if (isset($_GET['s'])) {
+                $my_posts = new WP_Query(array('post_type' => 'formations', 's' => $_GET['s']));
+            } */
+?>
