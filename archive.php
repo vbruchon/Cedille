@@ -175,6 +175,7 @@ SI BARRE DE RECHERCHE EST UTILISÉ
                         'post_type' => 'formations',
                         'format' => $_GET['format']
                     ));
+                    var_dump($my_posts);
                 endif;
             elseif (isset($_GET['s']) && $_GET['s'] !== "") :
                 $search_query = $_GET['s'];
@@ -187,6 +188,13 @@ SI BARRE DE RECHERCHE EST UTILISÉ
                 else :
                     $search_query = esc_sql($search_query);
                     $my_posts = new WP_Query(array('post_type' => 'formations', 's' => $search_query));
+                endif;
+            elseif (isset($_GET['format']) && !(isset($_GET['thematique']))) :
+                if (in_array($_GET['format'], $valid_formats)) :
+                    $my_posts = new WP_Query(array(
+                        'post_type' => 'formations',
+                        'format' => $_GET['format']
+                    ));
                 endif;
             else :
                 $my_posts = new WP_Query(array(
