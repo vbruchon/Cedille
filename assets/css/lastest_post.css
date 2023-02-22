@@ -1,0 +1,25 @@
+.latest-post {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 9px 1px rgba(0, 0, 0, 0.75);
+    transition: transform .4s;
+}
+
+.latest-post:hover {
+    transform: scale(1.08);
+}
+
+.latest-post-content {
+    font-size: 115%;
+    padding: 0 2%;
+}
+
+.button-latest-post {
+    display: block;
+    margin: 0 auto;
+    width: 10%;
+    font-size: 110%;
+}

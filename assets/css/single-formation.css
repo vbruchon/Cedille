@@ -369,7 +369,7 @@
 
 @media (min-width: 1101px) {
   #single_formation_main {
-    margin: 0;
+    margin: 0 5%;
   }
 
   .single_formation_thumbnail {
@@ -410,12 +410,13 @@
     font-size: 125%;
     margin-top: 7%;
     width: 47%;
+    margin-left: 4%;
   }
 
   #satisfaction p {
     font-size: 120%;
     margin-top: 12%;
-    margin-left: 12%;
+    margin-left: 20%;
     font-weight: 700;
     width: 60%;
   }
@@ -440,7 +441,7 @@
   }
 
   #single_formation_content {
-    width: 70%;
+    width: 75%;
     display: block;
     margin-left: 3%;
   }
