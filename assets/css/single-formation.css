@@ -3,6 +3,7 @@
     background-color: #fff4ea;
     margin: 0;
     padding: 0;
+    z-index: 0;
   }
 
   #single_formation_main {
@@ -12,6 +13,16 @@
     flex-wrap: wrap;
   }
 
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.184);
+    width: 100%;
+    height: 67%;
+  }
   #filArianne {
     display: flex;
     width: 30%;
@@ -373,7 +384,7 @@
   }
 
   .single_formation_thumbnail {
-    width: 65%;
+    width: 55%;
   }
 
   #single_formation_h1 h1 {
@@ -392,7 +403,6 @@
     margin-left: 5%;
     display: flex;
     align-items: center;
-    margin-bottom: 3%;
   }
 
   #single_formation_tarif img,
@@ -401,13 +411,13 @@
   }
 
   #single_formation_tarif p {
-    font-size: 125%;
+    font-size: 120%;
     width: 65%;
     margin-top: 7%;
   }
 
   #single_formation_duree p {
-    font-size: 125%;
+    font-size: 120%;
     margin-top: 7%;
     width: 47%;
     margin-left: 4%;
@@ -415,7 +425,7 @@
 
   #satisfaction p {
     font-size: 120%;
-    margin-top: 12%;
+    margin-top: 7%;
     margin-left: 20%;
     font-weight: 700;
     width: 60%;
@@ -432,7 +442,7 @@
   }
 
   #single_formation_bloc_contact p {
-    font-size: 105%;
+    font-size: 104%;
   }
 
   button,
@@ -493,7 +503,7 @@
 
 @media (min-width: 1205px) {
   #single_formation_sidebar_left {
-    width: 19%;
+    width: 22%;
     border: solid 5px #ffc61a;
     border-radius: 20px;
     max-height: 100%;
@@ -517,6 +527,6 @@
 
 @media (min-width: 1700px) {
   #single_formation_sidebar_left {
-    top: 185px !important;
+    top: 175px !important;
   }
 }
