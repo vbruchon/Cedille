@@ -11,7 +11,7 @@ function shortcode_carousel_TL()
 			return false;
 		else while ($tiers_lieux->have_posts()) : $tiers_lieux->the_post(); ?>
 			<div class="element">
-				<div class="logo"><a href="<? the_field('website_tl') ?>" target="_blank"><? the_post_thumbnail() ?></a></div>
+				<div class="logo"><a href="<? the_field('website_tl') ?>" target="_blank" aria-label="Site internet de <? the_title() ?>"><? the_post_thumbnail() ?></a></div>
 			</div>
 		<? endwhile; ?>
 	</div>
@@ -56,15 +56,15 @@ function shortcode_Advices($atts)
 	?>
 				<h2 class="formation_name"><? echo the_field($formationName) ?></h2>
 				<div class="content">
-					<img class="img1" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+					<img class="img1" src="/wp-content/themes/hello-elementor/assets/images/quote.png" alt="icône qui représente des côtes de citation">
 					<p class="the_field"><? echo the_field('avis_content') ?></p>
-					<img class="img2" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/quote.png" alt="quote icone">
+					<img class="img2" src="/wp-content/themes/hello-elementor/assets/images/quote.png" alt="icône qui représente des côtes de citation">
 				</div>
 				<div class="author">
 					<? if ($a['auteur'] === "Stagiaire") { ?>
-						<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/eleve.png" alt="icône stagiaire">
+						<img class="author_icone" src="/wp-content/themes/hello-elementor/assets/images/eleve.png" alt="icône stagiaire">
 					<? } else { ?>
-						<img class="author_icone" src="http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/enseignant-de-sexe-masculin-1.png" alt="icône enseingant">
+						<img class="author_icone" src="/wp-content/themes/hello-elementor/assets/images/single_formation/male-teacher.png" alt="icône enseingant">
 					<? } ?>
 					<p class="author_name"><? echo the_title() ?> ( <? echo the_terms($advices->ID, 'auteur') ?> )</p>
 				</div>
@@ -87,8 +87,12 @@ function shortcode_contact_element()
 		return false;
 	else while ($contact->have_posts()) : $contact->the_post(); ?>
 		<div id="contact">
-			<div id="phone"></div>
-			<div id="email"></div>
+			<div id="phone">
+				<img id="phone_picto" src="<? the_field('phone_picto') ?>" alt="pictogramme représentant un téléphone">
+			</div>
+			<div id="email">
+				<img id="email_picto" src="<? the_field('email_picto') ?>" alt="pictogramme représentant un email">
+			</div>
 		</div>
 	<? endwhile; ?>
 <?
@@ -98,44 +102,41 @@ add_shortcode('contact_element', 'shortcode_contact_element');
 
 function shortcode_thematique_home_page()
 {
+	$backgroundImg = array(
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/1.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/2.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/3.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/4.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/5.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/6.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/7.png',
+		'/wp-content/themes/hello-elementor/assets/images/thematiques/8.png'
+	);
+	$thematiques = get_terms('thematique', array('hide_empty' => false, 'post_per_page' => 8));
+	$i = 0;
+	shuffle($thematiques)
 ?>
 	<div id="all">
-
-		<?
-		$pictoThematique = [
-			'bureautique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/ordinateur.png',
-			'communication' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/le-marketing-numerique.png',
-			'cuisine' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/Frame_35_1_-removebg-preview.png',
-			'developpement-personnel' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/promotion.png',
-			'divers' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/pensez-autrement.png',
-			'graphique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/design-creatif.png',
-			'management' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/management.png',
-			'numerique' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/surveiller-la-tablette-et-le-smartphone.png'
-		];
-		$thematiques = get_terms('thematique', array('hide_empty' => false, 'post_per_page' => 8));
-		$i = 0;
-
-		foreach ($thematiques as $t) :
-
-			if ($i !== 8) :
-		?>
-				<div class="card">
+		<? foreach ($thematiques as $t) :
+			if ($i !== 8) : ?>
+				<div class="card" onclick="window.location.href='<? echo get_term_link($t) ?>'" style="background-image:url(<? echo $backgroundImg[$i] ?>); background-repeat: no-repeat;">
 					<a href="<? echo get_term_link($t) ?>">
-						<div class="picto">
-							<img src="<? echo ($pictoThematique[$t->slug]) ?>" alt="picto " + <? echo ($pictoThematique[$t->slug]) ?>>
-						</div>
-
 						<div class="term">
-							<? echo $t->name ?>
+							<? echo mb_strtoupper($t->name) ?>
 						</div>
 					</a>
 				</div>
-		<?
-				$i++;
+		<? $i++;
+			else :
+				break;
 			endif;
-		endforeach;
-		?>
+		endforeach; ?>
 	</div>
+	<script>
+		cards = document.querySelectorAll('.card');
+		console.log(cards);
+		
+	</script>
 <?
 }
 add_shortcode('all-thematique', 'shortcode_thematique_home_page');

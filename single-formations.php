@@ -6,18 +6,18 @@
  */
 
 $icone = [
-    'euros' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/euro.png',
-    'time' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/lhorloge.png',
-    'objectif' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/objectif.png',
-    'public' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/groupe-dutilisateurs.png',
-    'content' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/liste-de-controle.png',
-    'teachers' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/male-teacher.png',
-    'modalities' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/settings-Smartline.png',
-    'evaluations' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/suivi.png',
-    'access_time' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/temps-restant.png',
-    'accessibilites' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/accessibilite.png',
-    'others' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/classeurs.png',
-    'satisfaction' => 'http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/la-satisfaction.png'
+    'euros' => '/wp-content/themes/hello-elementor/assets/images/single_formation/euro.png',
+    'time' => '/wp-content/themes/hello-elementor/assets/images/single_formation/lhorloge-150x150.png',
+    'objectif' => '/wp-content/themes/hello-elementor/assets/images/single_formation/objectif.png',
+    'public' => '/wp-content/themes/hello-elementor/assets/images/single_formation/groupe-dutilisateurs.png',
+    'content' => '/wp-content/themes/hello-elementor/assets/images/single_formation/liste-de-controle.png',
+    'teachers' => '/wp-content/themes/hello-elementor/assets/images/single_formation/male-teacher.png',
+    'modalities' => '/wp-content/themes/hello-elementor/assets/images/single_formation/settings-Smartline-150x150.png',
+    'evaluations' => '/wp-content/themes/hello-elementor/assets/images/single_formation/suivi-150x150.png',
+    'access_time' => '/wp-content/themes/hello-elementor/assets/images/single_formation/temps-restant.png',
+    'accessibilites' => '/wp-content/themes/hello-elementor/assets/images/single_formation/accessibilite.png',
+    'others' => '/wp-content/themes/hello-elementor/assets/images/single_formation/classeurs.png',
+    'satisfaction' => '/wp-content/themes/hello-elementor/assets/images/single_formation/la-satisfaction.png'
 ];
 
 $terms = get_the_terms($post->ID, 'thematique');
@@ -29,6 +29,7 @@ $tax_query = array(
 );
 $params = array('post_type' => 'formations', 'tax_query' => array($tax_query), 'posts_per_page' => 3);
 $othersFormation = new WP_Query($params);
+$currentID = get_the_ID();
 ?>
 
 
@@ -40,9 +41,17 @@ $othersFormation = new WP_Query($params);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri() ?>">
-    <meta name="description" 
-    content="Bienvenue sur le programme de formation de <?php the_title() ?>. 
+    <meta name="description" content="Bienvenue sur le programme de formation de <?php the_title() ?>. 
     Vous retrouverez ici toutes les informations utiles comme le prix, la durée, les compétences, etc.">
+    <script>
+        function openPopup() {
+            let popup = `<? echo do_shortcode('[elementor-template id="1521"]'); ?>`;
+            let body = document.body;
+            const div = document.createElement('div');
+            div.innerHTML = `<? echo do_shortcode('[elementor-template id="1521"]'); ?>`;
+            body.appendChild(div);
+        }
+    </script>
 </head>
 
 <body>
@@ -51,6 +60,7 @@ $othersFormation = new WP_Query($params);
         <? get_header() ?>
     </header>
     <div class="global_css">
+        <? echo do_shortcode('[elementor-template id="1521"]'); ?>
 
         <body>
             <div id="single_formation_titre">
@@ -76,7 +86,7 @@ $othersFormation = new WP_Query($params);
                             <div id="slidebar_element">
                                 <div id="single_formation_tarif">
                                     <img class="single_formation_icone" src="<? echo $icone['euros'] ?>" alt="Pile de pièce de monnaie">
-                                    <p><? echo the_field('tarif_formation') ?> euros (€)</p>
+                                    <p><? echo the_field('tarif_formation') ?> </p>
                                 </div>
 
                                 <div id="single_formation_duree">
@@ -87,7 +97,8 @@ $othersFormation = new WP_Query($params);
                                 <div id="single_formation_bloc_contact">
                                     <p>Besoin d’adapter cette formation à vos besoins ?</p>
                                     <p>N’hésitez pas à nous contacter afin d’obtenir un devis sur mesure ! </p>
-                                    <button onclick="window.location.href ='http://cedille-formation.ftalps.fr/contact/';">Nous contacter</button>
+                                    <!-- <button id="openPopup" onclick="openPopup()">Nous contacter</button> -->
+                                    <? echo do_shortcode('[elementor-template id="1526"]') ?>
                                 </div>
                             </div>
                         </div>
@@ -164,19 +175,21 @@ $othersFormation = new WP_Query($params);
                                 <p><? echo the_field('accessibilites') ?></p>
                             </div>
 
-                            <div id="satisfaction">
-                                <img class="single_formation_icone" src="<? echo $icone['satisfaction'] ?>" alt="taux de satisfaction">
-                                <p><strong><? echo the_field('taux_satisfaction') ?>% </strong> taux de satisfaction</p>
-                            </div>
-
-                            <div class="single_formation_block_title_formation">
-                                <img class="single_formation_icone3" src="<? echo $icone['others'] ?>" alt="icône de 3 classeurs">
-                                <h2>Ces formations peuvent vous intéresser : </h2>
-                            </div>
-
+                            <? if (the_field('taux_satisfaction')) : ?>
+                                <div id="satisfaction">
+                                    <img class="single_formation_icone" src="<? echo $icone['satisfaction'] ?>" alt="taux de satisfaction">
+                                    <p><strong><? echo the_field('taux_satisfaction') ?>% </strong> taux de satisfaction</p>
+                                </div>
+                            <? endif; ?>
+                            
+                            <? if ($othersFormation->have_posts() && $othersFormation->post_count > 1) : ?>
+                                <div class="single_formation_block_title_formation">
+                                    <img class="single_formation_icone3" src="<? echo $icone['others'] ?>" alt="icône de 3 classeurs">
+                                    <h2>Ces formations peuvent vous intéresser : </h2>
+                                </div>
+                            <? endif; ?>
                             <div id="single_formation_carte_Formation">
-                                <?php $currentID = get_the_ID();
-                                if ($othersFormation->have_posts()) :
+                                <? if ($othersFormation->have_posts()) :
                                     while ($othersFormation->have_posts()) : $othersFormation->the_post();
                                         $postID = get_the_ID();
                                         if ($currentID !== $postID) :  ?>
@@ -189,14 +202,12 @@ $othersFormation = new WP_Query($params);
                                                 </h2>
                                                 <button id="single_formation_link_formation" onclick="window.location.href = '<? the_permalink() ?>'">Découvrir la formation</button>
                                             </div>
-                                    <?
-                                        endif;
+                                    <? endif;
                                     endwhile;
-                                    ?>
 
-                                <?php else : ?>
+                                else : ?>
                                     <p>Aucune formation n'a été trouvé dans cette catégorie.</p>
-                                <?php endif; ?>
+                                <? endif; ?>
 
                             </div>
                         </div>
