@@ -21,6 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .picto {
@@ -30,7 +31,9 @@
 }
 
 .term {
-    font-size: 110%;
+    font-size: 200%;
+    margin-left: 30%;
+    width: 30%;
 }
 @media (max-width: 767px){
     .card{
