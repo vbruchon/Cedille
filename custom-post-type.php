@@ -77,6 +77,21 @@ function formation_custom_post_type()
         'hierarchical' => true,
     );
     register_taxonomy('format', 'formations', $args);
+
+    //Taxonomy
+    $labels = array(
+        'name' => 'Prise en charge',
+        'new_item_name' => 'Ajouter une modalitées de prise en charge',
+        'parent_item' => 'Modalitées parentes',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'show_in_rest' => true,
+        'hierarchical' => true,
+    );
+    register_taxonomy('pec', 'formations', $args);
 }
 
 

@@ -43,12 +43,12 @@
 
 .caroussel_prev {
     right: auto;
-    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/previous.png");
+    background: center center no-repeat #ffc61a url("../images/previous.png");
     background-size: 100%;
 }
 
 .caroussel_next {
-    background: center center no-repeat #ffc61a url("http://cedille-formation.ftalps.fr/wp-content/uploads/2022/12/next.png");
+    background: center center no-repeat #ffc61a url("../images/next.png");
     background-size: 100%;
     right: 0
 }

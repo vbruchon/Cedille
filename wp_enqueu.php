@@ -21,14 +21,15 @@ function my_theme_enqueue_scripts()
 		wp_enqueue_script('tiers-lieux_caroussel-script', get_stylesheet_directory_uri() . '/assets/js/carousel.js', array('jquery'), '1.0', true);
 	}
 
-	if (has_shortcode($post->post_content, 'advices')) {
+	if (has_shortcode(get_post()->post_content, 'advices')) {
 		wp_enqueue_style('advices-style', get_stylesheet_directory_uri() . '/assets/css/carouselAdvices.css');
+		wp_enqueue_script('tiers-lieux_caroussel-script', get_stylesheet_directory_uri() . '/assets/js/carousel.js', array('jquery'), '1.0', true);
 		wp_enqueue_script('advices-script', get_stylesheet_directory_uri() . '/assets/js/caroussel-advices.js', array('jquery'), '1.0', true);
 	}
 
-	/* 	if (has_shortcode($post->post_content, 'contact_element')) {
-		wp_enqueue_style('contact_element-style', get_stylesheet_directory_uri() . '/assets/css/contact.css');
-		wp_enqueue_script('contact_element-script', get_stylesheet_directory_uri() . '/assets/js/contact.js', array('jquery'), '1.0', true);
+	/* if (do_shortcode_tag('[advices]')) {
+		wp_enqueue_style('advices-style', get_stylesheet_directory_uri() . '/assets/css/carouselAdvices.css');
+		wp_enqueue_script('advices-script', get_stylesheet_directory_uri() . '/assets/js/caroussel-advices.js', array('jquery'), '1.0', true);
 	} */
 
 	if (has_shortcode($post->post_content, 'all-thematique')) {

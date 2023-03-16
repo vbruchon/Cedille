@@ -13,6 +13,8 @@
         border-radius: 30px;
         cursor: pointer;
         transition: transform .4s;
+        position: relative;
+        height: 440px;
     }
 
     .carte:hover {
@@ -28,11 +30,12 @@
 
 
     #filterbar {
-        margin: 3% auto 3% 10%;
+        margin: 3% auto;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        width: 110%;
     }
 
     #formFilter {
@@ -49,7 +52,7 @@
 
     #thema,
     #forma {
-        width: 50%;
+        width: 35%;
     }
 
     #search form {
@@ -85,6 +88,12 @@
         font-size: 120%;
     }
 
+    #pec {
+        display: inline-block;
+        width: 18%;
+        margin-top: 3%;
+    }
+
 
 
 
@@ -103,6 +112,7 @@
         width: auto;
         height: auto;
         border-radius: 30px 30px 0px 0px;
+        position: relative;
     }
 
     .carte_img img {
@@ -110,46 +120,93 @@
     }
 
     .carte_title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-bottom: 50px;
         text-align: center;
         font-weight: 600 !important;
         font-size: 120% !important;
         margin: 2% auto 0 auto;
+        padding: 0 1%;
     }
 
-    .link_formation {
-        display: block;
-        margin: 6% auto 3% auto;
-        font-size: 100%;
+    .etiquettes,
+    .info {
+        display: flex;
     }
 
-    .link_formation:hover {
-        font-size: 120%;
+    .etiquettes {
+        flex-direction: column;
+        width: 50%;
+        position: absolute;
+        top: 5px;
+        left: 5px;
     }
 
-    .category {
+    .teacher,
+    .location {
+        margin-bottom: 5%;
+        background-color: #5ccbc3;
+        border-radius: 10px 30px 30px 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 135%;
+    }
+
+    .teacher p,
+    .location p {
+        color: #fff4ea;
+        margin: auto auto auto 6%;
+        font-family: var(--e-global-typography-primary-font-family), Sans-serif;
+        font-weight: var(--e-global-typography-primary-font-weight);
+    }
+
+    .separateur {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .price,
+    .separateur,
+    .hours {
+        display: flex;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
         justify-content: center;
     }
 
-    .name_category {
-        margin-top: 7%;
+    .picto img {
+        margin-left: 15%;
+        width: 30px;
+        height: 30px;
     }
 
-    .icone_category {
-        width: 20%;
-        height: auto;
-        margin-right: 7%;
-        margin-bottom: 2%;
+    .picto,
+    .location,
+    .teacher {
+        display: flex;
     }
 }
 
 
-@media (max-width: 1100px){
-    #filterbar, #formFilter {
+@media (max-width: 1100px) {
+
+    #filterbar,
+    #formFilter {
         flex-direction: column;
     }
 
-    #formFilter, #thema, #forma, #search {
+    #formFilter,
+    #thema,
+    #forma,
+    #search {
         width: 100%;
     }
 
@@ -177,7 +234,7 @@
     }
 
     #thema,
-    #forma {
+    #forma, #pec {
         width: 100%;
     }
 
@@ -186,11 +243,21 @@
         text-align: center;
     }
 
+    .teacher, .location{
+        width: 200%;
+    }
+
+    .teacher .picto, .location .picto{
+        width: 15%
+    }
+    #formFilter input{
+        width: 10%;
+    }
 }
 
 @media (min-width : 768px) and (max-width : 1100px) {
     .carte {
-        width: 40%;
+        width: 45%;
     }
 }
 
@@ -207,5 +274,10 @@
     #formFilter input {
         width: 20%;
         font-size: 120%;
+    }
+}
+@media (min-width : 1600px) {
+    .carte {
+        width: 20%;
     }
 }
