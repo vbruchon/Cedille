@@ -1,41 +1,58 @@
 class Caroussel {
     constructor(element, options = {}) {
+        console.log("element : " + element);
         this.element = element;
+        console.log("this.element1 : " + this.element);
+
         this.options = Object.assign({}, {
             slidesToScroll: 1,
             slidesVisible: 3,
             infinite: true,
             autoPlayer: true
         }, options);
+        console.log("this.element2 : " + this.element);
+
         this.isMobile = false
         this.isTablett = false
         this.currentItem = 5
+        console.log("this.element3 : " + this.element);
 
-        let children = [].slice.call(this.element.children)
-        this.root = this.createDivWithClass('caroussel')
-        this.container = this.createDivWithClass('caroussel_container')
-        this.root.appendChild(this.container)
-        this.element.appendChild(this.root)
-        this.moveCallbacks = []
-        this.items = children.map((child) => {
-            let item = this.createDivWithClass('caroussel_item')
-            item.appendChild(child)
-            return item
-        })
-               if (this.options.infinite) {
+        //let children = [].slice.call(this.element.children)
+        if (this.element) {
+            let children = [].slice.call(this.element.children);
+
+
+            //let children = [].slice.call(Array.from(this.element.children))
+            console.log("children :" + children);
+            this.root = this.createDivWithClass('caroussel')
+            this.container = this.createDivWithClass('caroussel_container')
+            this.root.appendChild(this.container)
+            this.element.appendChild(this.root)
+            this.moveCallbacks = []
+            this.items = children.map((child) => {
+                let item = this.createDivWithClass('caroussel_item')
+                item.appendChild(child)
+                return item
+            })
+            if (this.options.infinite) {
                 this.infinite_slide()
             }
-            
-        //}
 
-        this.items.forEach(item => this.container.appendChild(item))
+            //}
 
-        this.setStyle()
-        this.createNavigation()
-        this.moveCallbacks.forEach(cb => cb(this.currentItem))
-        this.autoPlay()
-        this.resizeWindow()
-        window.addEventListener('resize', this.resizeWindow.bind(this))
+            this.items.forEach(item => this.container.appendChild(item))
+
+            this.setStyle()
+            this.createNavigation()
+            this.moveCallbacks.forEach(cb => cb(this.currentItem))
+            this.autoPlay()
+            this.resizeWindow()
+            window.addEventListener('resize', this.resizeWindow.bind(this))
+
+            // ...
+        } else {
+            console.error("L'élément est null ou undefined");
+        }
     }
 
     /**
@@ -89,11 +106,12 @@ class Caroussel {
      */
     goToItem(index, animation = true) {
         if (index < 0) {
-            index = this.items.length - this.options.slidesVisible
-        } else if (index >= this.items.length || (this.items[this.currentItem + this.options.slidesVisible] === undefined && index > this.currentItem)) {
+            index = this.items.length - this.options.slidesVisible;
+        } else if (index >= this.items.length || (this.items.slice(index, index + this.options.slidesVisible).indexOf(undefined) !== -1)) {
             index = 0;
         }
-
+        /*         } else if (index >= this.items.length || (this.items[this.currentItem + this.options.slidesVisible] === undefined && index > this.currentItem)) {
+         */
         let translateX = index * -100 / this.items.length
         if (animation == false) {
             this.container.style.transition = 'none'
@@ -158,17 +176,17 @@ class Caroussel {
         }
     }
 
-    infinite_slide(){
+    infinite_slide() {
         let offset = this.options.slidesVisible * 2 - 1;
-                if (offset > this.items.length) {
-                  offset = this.items.length - 1;
-                }
-                this.items = [
-                    ...this.items.slice(this.items.length - offset).map(item => item.cloneNode(true)),
-                    ...this.items,
-                    ...this.items.slice(0, offset).map(item => item.cloneNode(true)),
-                ]
-                this.goToItem(offset, true)
+        if (offset > this.items.length) {
+            offset = this.items.length - 1;
+        }
+        this.items = [
+            ...this.items.slice(this.items.length - offset).map(item => item.cloneNode(true)),
+            ...this.items,
+            ...this.items.slice(0, offset).map(item => item.cloneNode(true)),
+        ]
+        this.goToItem(offset, true)
     }
 }
 
