@@ -1,0 +1,44 @@
+#all {
+    display: flex;
+    flex-direction: center;
+    flex-wrap: wrap;
+    width: 85%;
+    margin: 0% 10%;
+}
+#all .card a {
+    color: #37827a !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 45%;
+    height: 250px;
+    background-color: #fff4ea;
+    border-radius: 30px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.picto {
+    width: 20%;
+    height: auto;
+    margin: 0 6%;
+}
+
+.term {
+    font-size: 200%;
+    margin-left: 30%;
+    width: 30%;
+}
+@media (max-width: 767px){
+    .card{
+        width: 100%;
+    }
+}
+
+

@@ -1,0 +1,123 @@
+/* Default screen */
+@media screen {
+    #contact {
+        position: fixed;
+        z-index: 100;
+        right: 15px;
+        top: 235px;
+        width: 23%;
+    }
+
+    #phone,
+    #email {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .picto-contact {
+        width: 75px;
+        height: 75px;
+        margin: 0 0 1% 0;
+        padding: 3%;
+        background-color: #ff0080;
+        background-size: cover;
+        background-position: center center;
+        border-radius: 15%;
+        transition: transform .4s;
+    }
+
+    #phone .picto-contact img,
+    #email .picto-contact img {
+        width: 150% !important;
+        border-radius: 15%;
+    }
+
+    .picto-contact:hover {
+        cursor: pointer;
+        transform: scale(1.32);
+        border-radius: 15%;
+    }
+
+    #phone_number,
+    #email_adress {
+        display: none;
+        height: 45px;
+        align-items: center;
+        background-color: #ff0080;
+        border-radius: 0 30px 30px 0;
+    }
+
+    #phone_number {
+        width: 180px;
+    }
+
+    #email_adress {
+        width: 375px;
+    }
+
+    #phone_number a,
+    #email_adress a {
+        color: #fff4ea !important;
+        font-size: 150%;
+        font-weight: bold !important;
+        transition: transform .4s;
+    }
+
+    #phone_number a {
+        margin: 0 10%;
+    }
+
+    #email_adress a {
+        margin: 0 5%;
+    }
+}
+
+/* Small screens */
+@media (max-width: 767px) {
+    #contact {
+        top: 250px;
+        right: 5px;
+    }
+
+    .picto-contact {
+        width: 55px;
+        height: 55px;
+        padding: 5%;
+    }
+}
+
+/* Medium screens */
+@media (min-width: 768px) and (max-width: 1100px) {
+    #contact {
+        top: 210px;
+        right: 1%;
+        width: 55%;
+    }
+
+    .picto-contact {
+        width: 65px;
+        height: 65px;
+        padding: 2%;
+    }
+
+    #email_adress {
+        width: 375px;
+    }
+
+    #phone_number {
+        width: 180px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1101px) {
+    #contact {
+        width: 45%;
+    }
+
+    .picto-contact {
+        padding: 1%;
+    }
+}

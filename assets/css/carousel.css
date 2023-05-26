@@ -1,0 +1,59 @@
+#container {
+    margin-top: 5%;
+}
+
+.caroussel {
+    position: relative;
+    height: 330px;
+    overflow: hidden;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+#container .caroussel_item {
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+
+#container .element {
+    width: 250px;
+    height: auto;
+    transition: transform .4s;
+}
+
+#container .element img {
+    border-radius: 20%;
+    padding: 0 2%;
+}
+
+#container .element:hover {
+    transform:scale(1.08);
+}
+
+.caroussel_next,
+.caroussel_prev {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 45%;
+    cursor: pointer;
+}
+
+.caroussel_prev {
+    right: auto;
+    background: center center no-repeat #ffc61a url("../images/previous.png");
+    background-size: 100%;
+}
+
+.caroussel_next {
+    background: center center no-repeat #ffc61a url("../images/next.png");
+    background-size: 100%;
+    right: 0
+}
+
+.caroussel_next:hover,
+.caroussel_prev:hover {
+    transform: scale(1.2);
+}

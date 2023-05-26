@@ -1,0 +1,283 @@
+@media screen {
+    main {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+
+    .carte {
+        background-color: #FFFF;
+        margin-left: 4%;
+        margin-bottom: 5%;
+        padding: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.184);
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform .4s;
+        position: relative;
+        height: 440px;
+    }
+
+    .carte:hover {
+        transform: scale(1.08);
+    }
+
+    #archive_formation_title {
+        text-align: center;
+        font-size: 150%;
+        margin-top: 5%;
+    }
+
+
+
+    #filterbar {
+        margin: 3% auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 110%;
+    }
+
+    #formFilter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 60%;
+    }
+
+    #search {
+        width: 30%;
+        margin-top: 1.5%;
+    }
+
+    #thema,
+    #forma {
+        width: 35%;
+    }
+
+    #search form {
+        width: 50%;
+    }
+
+    #thema label,
+    #forma label {
+        margin-bottom: 2%;
+    }
+
+    #filterbar h3 {
+        font-size: 100%;
+        text-align: center;
+    }
+
+    #formFilter select {
+        width: 90%;
+        margin: 3%;
+        background-color: #fff4ea;
+        border: 2px solid #37827a;
+        text-align: center;
+        color: #37827a;
+        font-weight: bolder;
+    }
+
+    #formFilter option:hover {
+        background-color: #5ccbc3;
+    }
+
+    #formFilter input {
+        width: 35%;
+        font-size: 120%;
+    }
+
+    #pec {
+        display: inline-block;
+        width: 18%;
+        margin-top: 3%;
+    }
+
+
+
+
+
+
+    #carte_Formation {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .carte_img {
+        margin-bottom: 5%;
+        display: flex;
+        justify-content: center;
+        width: auto;
+        height: auto;
+        border-radius: 30px 30px 0px 0px;
+        position: relative;
+    }
+
+    .carte_img img {
+        border-radius: 30px 30px 0px 0px;
+    }
+
+    .carte_title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin-bottom: 50px;
+        text-align: center;
+        font-weight: 600 !important;
+        font-size: 120% !important;
+        margin: 2% auto 0 auto;
+        padding: 0 1%;
+    }
+
+    .etiquettes,
+    .info {
+        display: flex;
+    }
+
+    .etiquettes {
+        flex-direction: column;
+        width: 50%;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+
+    .teacher,
+    .location {
+        margin-bottom: 5%;
+        background-color: #5ccbc3;
+        border-radius: 10px 30px 30px 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 135%;
+    }
+
+    .teacher p,
+    .location p {
+        color: #fff4ea;
+        margin: auto auto auto 6%;
+        font-family: var(--e-global-typography-primary-font-family), Sans-serif;
+        font-weight: var(--e-global-typography-primary-font-weight);
+    }
+
+    .separateur {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .price,
+    .separateur,
+    .hours {
+        display: flex;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .picto img {
+        margin-left: 15%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .picto,
+    .location,
+    .teacher {
+        display: flex;
+    }
+}
+
+
+@media (max-width: 1100px) {
+
+    #filterbar,
+    #formFilter {
+        flex-direction: column;
+    }
+
+    #formFilter,
+    #thema,
+    #forma,
+    #search {
+        width: 100%;
+    }
+
+    #search form {
+        width: 87%;
+    }
+
+}
+
+
+@media (max-width : 450px) {
+    .link_formation {
+        font-size: 90% !important;
+    }
+
+    .link_formation:hover {
+        font-size: 105% !important;
+    }
+
+}
+
+@media (max-width : 767px) {
+    .carte {
+        width: 85%;
+    }
+
+    #thema,
+    #forma, #pec {
+        width: 100%;
+    }
+
+    #thema label,
+    #forma label {
+        text-align: center;
+    }
+
+    .teacher, .location{
+        width: 200%;
+    }
+
+    .teacher .picto, .location .picto{
+        width: 15%
+    }
+    #formFilter input{
+        width: 10%;
+    }
+}
+
+@media (min-width : 768px) and (max-width : 1100px) {
+    .carte {
+        width: 45%;
+    }
+}
+
+@media (min-width : 1101px) {
+    .carte {
+        width: 28%;
+    }
+
+
+    #formFilter select {
+        margin: 0 3% 0 0;
+    }
+
+    #formFilter input {
+        width: 20%;
+        font-size: 120%;
+    }
+}
+@media (min-width : 1600px) {
+    .carte {
+        width: 20%;
+    }
+}
